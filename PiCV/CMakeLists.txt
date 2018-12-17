@@ -4,5 +4,14 @@ add_library(PiCV SHARED
 )
 
 target_include_directories(PiCV PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}
+	${CMAKE_SOURCE_DIR}/include
+)
+
+target_link_libraries(PiCV LINK_PUBLIC
+#    /Users/zhongsifen/Work/opencv-4.0.0/build/install/lib/libopencv_core.4.0.0.dylib
+    ${CMAKE_SOURCE_DIR}/lib/libopencv_core.4.0.0.dylib
+    ${CMAKE_SOURCE_DIR}/lib/libopencv_imgproc.4.0.0.dylib
+    ${CMAKE_SOURCE_DIR}/lib/libopencv_highgui.4.0.0.dylib
+    ${CMAKE_SOURCE_DIR}/lib/libopencv_videoio.4.0.0.dylib
 )

@@ -1,4 +1,7 @@
 build
+build_xcode
+include
+lib
 *.dylib
 */*.dylib
 
