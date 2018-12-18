@@ -1,8 +1,13 @@
 #include "PiCV.hpp"
 
-void PiCV_run() {
-//	cv::VideoCapture capt(0);
-	cv::VideoCapture capt("/Users/zhongsifen/Data/48.3gp");
+void PiCV_run(char * path) {
+	cv::VideoCapture capt;
+	if (path == nullptr) {
+		capt.open(0);
+	}
+	else {
+		capt.open(path);
+	}
 	if (!capt.isOpened()) return;
 	cv::Size sz((int)capt.get(cv::CAP_PROP_FRAME_WIDTH),
 				(int)capt.get(cv::CAP_PROP_FRAME_HEIGHT));
@@ -10,10 +15,10 @@ void PiCV_run() {
 	cv::Mat frame;
 	for(;;)	{
 		capt.read(frame); if (frame.empty()) break;
-		
+
 //		++frameNum;
 //		cout << "Frame: " << frameNum << "# ";
-		
+
 		////////////////////////////////// Show frame /////////////////////////////////////////////
 		cv::imshow("PiCV", frame);
 		int key = cv::waitKey(5);
@@ -22,6 +27,5 @@ void PiCV_run() {
 
 
 
-	printf("4: PiCV\n");
+	printf("5: PiCV\n");
 }
-

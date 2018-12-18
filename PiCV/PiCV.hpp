@@ -5,5 +5,5 @@
 #include <opencv2/imgcodecs.hpp>
 
 extern "C" {
-void PiCV_run();
+void PiCV_run(char * path);
 }
