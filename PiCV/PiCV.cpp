@@ -1,6 +1,6 @@
 #include "PiCV.hpp"
 
-void PiCV_run(char * path) {
+void PiCV::run(char * path) {
 	cv::VideoCapture capt;
 	if (path == nullptr) {
 		capt.open(0);

@@ -2,7 +2,7 @@
 
 char * path = { (char*)"/Users/zhongsifen/Data/48.3gp" };
 int main() {
-	PiCV_run(path);
+	PiCV::run(path);
 	
 	return 0;
 }
