@@ -1,3 +1,6 @@
+modules
+dlib
+opencv
 build
 build_xcode
 include
