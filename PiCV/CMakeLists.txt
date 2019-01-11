@@ -16,7 +16,7 @@ target_link_libraries(PiCV LINK_PUBLIC
     ${CMAKE_SOURCE_DIR}/lib/libopencv_imgproc.4.0.0.dylib
     ${CMAKE_SOURCE_DIR}/lib/libopencv_highgui.4.0.0.dylib
     ${CMAKE_SOURCE_DIR}/lib/libopencv_videoio.4.0.0.dylib
-    /usr/local/opt/lapack/lib/liblapack.dylib
-    ${CMAKE_SOURCE_DIR}/lib/libippicv.a
-    ${CMAKE_SOURCE_DIR}/lib/libzlib.a
+#    /usr/local/opt/lapack/lib/liblapack.dylib
+#    ${CMAKE_SOURCE_DIR}/lib/libippicv.a
+#    ${CMAKE_SOURCE_DIR}/lib/libzlib.a
 )
