@@ -11,12 +11,8 @@ target_include_directories(PiCV PUBLIC
 )
 
 target_link_libraries(PiCV LINK_PUBLIC
-#    ${CMAKE_SOURCE_DIR}/lib/libopencv_core.a
-    ${CMAKE_SOURCE_DIR}/lib/libopencv_core.4.0.0.dylib
-    ${CMAKE_SOURCE_DIR}/lib/libopencv_imgproc.4.0.0.dylib
-    ${CMAKE_SOURCE_DIR}/lib/libopencv_highgui.4.0.0.dylib
-    ${CMAKE_SOURCE_DIR}/lib/libopencv_videoio.4.0.0.dylib
-#    /usr/local/opt/lapack/lib/liblapack.dylib
-#    ${CMAKE_SOURCE_DIR}/lib/libippicv.a
-#    ${CMAKE_SOURCE_DIR}/lib/libzlib.a
+    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_core.so
+    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_imgproc.so
+    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_highgui.so
+    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_videoio.so
 )
