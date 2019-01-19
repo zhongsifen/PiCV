@@ -4,6 +4,9 @@ add_library(PiCV SHARED
     _PiCV.cpp
     _PiCV.hpp
 )
+set_target_properties(PiCV PROPERTIES
+    SUFFIX .so
+)
 
 target_include_directories(PiCV PUBLIC
     ${CMAKE_SOURCE_DIR}
@@ -11,8 +14,8 @@ target_include_directories(PiCV PUBLIC
 )
 
 target_link_libraries(PiCV LINK_PUBLIC
-    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_core.so
-    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_imgproc.so
-    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_highgui.so
-    /home/pi/Work/opencv-4.0.1/build/lib/libopencv_videoio.so
+    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_core.dylib
+    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_imgproc.dylib
+    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_highgui.dylib
+    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_videoio.dylib
 )
