@@ -10,12 +10,12 @@ set_target_properties(PiCV PROPERTIES
 
 target_include_directories(PiCV PUBLIC
     ${CMAKE_SOURCE_DIR}
-	${CMAKE_SOURCE_DIR}/include
+	${CMAKE_SOURCE_DIR}/../opencv/build/install/include/opencv4
 )
 
 target_link_libraries(PiCV LINK_PUBLIC
-    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_core.dylib
-    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_imgproc.dylib
-    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_highgui.dylib
-    ${CMAKE_SOURCE_DIR}/opencv/build/lib/libopencv_videoio.dylib
+    ${CMAKE_SOURCE_DIR}/../opencv/build/install/lib/libopencv_core.dylib
+    ${CMAKE_SOURCE_DIR}/../opencv/build/install/lib/libopencv_imgproc.dylib
+    ${CMAKE_SOURCE_DIR}/../opencv/build/install/lib/libopencv_highgui.dylib
+    ${CMAKE_SOURCE_DIR}/../opencv/build/install/lib/libopencv_videoio.dylib
 )
