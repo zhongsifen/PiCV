@@ -1,7 +1,4 @@
+opencv
 dlib
 build
-include
-lib
-*.dylib
-*/*.dylib
-
+trash
