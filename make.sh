@@ -1,4 +1,13 @@
 mkdir -p build
 cd build
-cmake -DCMAKE_CXX_FLAGS="-std=c++11" ..
+
+cmake \
+-D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_COLOR_MAKEFILE=OFF \
+-D CMAKE_INSTALL_PREFIX=./install \
+-D CMAKE_CXX_FLAGS="-std=c++11" \
+-D BUILD_SHARED_LIBS=ON \
+..
+
 make
+make install

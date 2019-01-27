@@ -8,14 +8,16 @@ add_library(PiDL SHARED
 
 target_include_directories(PiDL PUBLIC
 	${CMAKE_SOURCE_DIR}
-	${CMAKE_SOURCE_DIR}/include
+	${CMAKE_SOURCE_DIR}/opencv/build/install/include/opencv4
+	${CMAKE_SOURCE_DIR}/dlib/build/install/include
 )
 
 target_link_libraries(PiDL LINK_PUBLIC
-	dlib
 	PiCV
-	${CMAKE_SOURCE_DIR}/lib/libopencv_core.4.0.0.dylib
-	${CMAKE_SOURCE_DIR}/lib/libopencv_imgproc.4.0.0.dylib
-	${CMAKE_SOURCE_DIR}/lib/libopencv_highgui.4.0.0.dylib
-	${CMAKE_SOURCE_DIR}/lib/libopencv_videoio.4.0.0.dylib
+#	dlib
+	${CMAKE_SOURCE_DIR}/dlib/build/install/lib/libdlib.dylib
+	${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_core.dylib
+    ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_imgproc.dylib
+    ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_highgui.dylib
+    ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_videoio.dylib
 )
