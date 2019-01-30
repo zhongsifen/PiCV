@@ -66,6 +66,22 @@ bool PiDL::run()
 	return true;
 }
 
+bool PiDL::runFace(Image & frame, Face & face)
+{
+	for (;;) {
+		_capt.read(frame);		if (frame.empty()) break;
+		Gray gray;
+		toGray(frame, gray);
+		doFace(gray, face);
+
+		cv::Mat s = frame.clone();
+		showFace(s, face);
+		cv::imshow("PiCV", s);
+		int key = cv::waitKey(5);		if (key == 27) break;
+	}
+	return true;
+}
+
 bool PiDL::doFace(Gray & gray, Face & face)
 {
 	std::vector<std::pair<double, dlib::rectangle>> dets;

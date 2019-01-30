@@ -31,18 +31,14 @@ namespace PiDL {
 	bool setup(char video_path[]);
 	bool quit();
 	bool run();
+	bool runFace(Image & frame, Face & face);
 
-	bool doFace(Gray& gray, Face& face);
+	bool doFace(Gray & gray, Face & face);
 	bool doLandmark(Gray & gray, cv::Rect & r, Landmark & landmark);
 	bool doChip(Image & image, cv::Rect & r, Chip & chip);
 	bool doDesc(Chip & chip, Desc & desc);
 	bool doDesc(Image & image, cv::Rect & r, Chip & chip, Desc & desc);
 	
-	bool toGray(Image & image, Gray & gray);
-	bool toEEM(Landmark & landmark, EEM & eem);
-	bool toChipTri(Image & image, Landmark & landmark, EEM & tri, cv::Size & box, Chip & chip);
-	bool toMeasure(Desc & d1, Desc & d2, float & measure);
-
 	void fdlib(Image_D & image_d, Image & image);
 	void fdlib(Gray_D & gray_d, Gray & gray);
 	void tdlib(Image & image, Image_D & image_d);
