@@ -6,8 +6,6 @@ cmake \
 -D CMAKE_COLOR_MAKEFILE=OFF \
 -D CMAKE_INSTALL_PREFIX=./install \
 -D CMAKE_CXX_FLAGS="-std=c++11" \
--D BUILD_SHARED_LIBS=ON \
 ..
 
 make
-make install

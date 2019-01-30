@@ -12,16 +12,58 @@
 
 //#include <dlib/gui_widgets.h>
 
-PiDL::PiDL()
+namespace PiDL {
+	dlib::frontal_face_detector _fd;
+	dlib::shape_predictor _sp;
+	dlib_anet::anet_type _net;
+
+	cv::VideoCapture _capt;
+} // namespace PiDL
+
+bool PiDL::setup(char video_path[])
 {
-	_fd = dlib::get_frontal_face_detector();
-	dlib::deserialize(PiDLModel::_DAT_SP) >> _sp;
-	dlib::deserialize(PiDLModel::_DAT_NET) >> _net;
+		if (video_path == nullptr)
+		{
+			_capt.open(0);
+		}
+		else
+		{
+			_capt.open(video_path);
+		}
+		if (!_capt.isOpened())
+			return false;
+		// cv::Size sz((int)capt.get(cv::CAP_PROP_FRAME_WIDTH),
+		// 			(int)capt.get(cv::CAP_PROP_FRAME_HEIGHT));
+
+		_fd = dlib::get_frontal_face_detector();
+		dlib::deserialize(_DAT_SP) >> _sp;
+		dlib::deserialize(_DAT_NET) >> _net;
+
+		return true;
 }
 
-PiDL::~PiDL()
+bool PiDL::quit()
 {
+	return true;
+}
 
+bool PiDL::run()
+{
+	cv::Mat frame;
+	for (;;)
+	{
+		_capt.read(frame);
+		if (frame.empty())
+			break;
+
+		////////////////////////////////// Show frame /////////////////////////////////////////////
+		cv::imshow("PiCV", frame);
+		int key = cv::waitKey(5);
+		if (key == 27)
+			break;
+	}
+	
+	return true;
 }
 
 bool PiDL::doFace(Gray & gray, Face & face)

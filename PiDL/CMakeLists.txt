@@ -15,9 +15,12 @@ target_include_directories(PiDL PUBLIC
 target_link_libraries(PiDL LINK_PUBLIC
 	PiCV
 #	dlib
-	${CMAKE_SOURCE_DIR}/dlib/build/install/lib/libdlib.dylib
+	${CMAKE_SOURCE_DIR}/dlib/build/install/lib/libdlib.a
 	${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_core.dylib
     ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_imgproc.dylib
     ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_highgui.dylib
-    ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_videoio.dylib
+	${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_videoio.dylib
+	/usr/lib/libcblas.dylib
+    /usr/lib/liblapack.dylib
+
 )

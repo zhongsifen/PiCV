@@ -9,5 +9,5 @@ target_include_directories(appPiDL PUBLIC
 )
 
 target_link_libraries(appPiDL LINK_PUBLIC
-     PiDL
+    PiDL
 )
