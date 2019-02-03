@@ -1,4 +1,4 @@
-#include "PiCV.hpp"
+#include "_PiCV.hpp"
 
 bool PiCV::setupVideo(char video_path[]) {
 	if (video_path == nullptr) _capt.open(0);
@@ -16,6 +16,12 @@ bool PiCV::readVideoFrame() {
 bool PiCV::showVideoFrame() {
 	cv::imshow("PiCV", _frame);
 	if (cv::waitKey(5) == 27) return false;
+
+	return true;
+}
+
+bool PiCV::getVideoFrame(cv::Mat & frame) { 
+	frame = _frame;
 
 	return true;
 }

@@ -18,13 +18,11 @@ namespace PiDL {
 	dlib_anet::anet_type _net;
 } // namespace PiDL
 
-bool PiDL::quit()
-{
-	return true;
-}
+bool PiDL::setup() {
+	_fd = dlib::get_frontal_face_detector();
+	dlib::deserialize(_DAT_SP) >> _sp;
+	dlib::deserialize(_DAT_NET) >> _net;
 
-bool PiDL::run()
-{
 	return true;
 }
 

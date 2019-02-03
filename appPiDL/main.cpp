@@ -6,7 +6,6 @@ int main() {
 	PiCV::Face face;
 	PiCV::setupVideo(video_path);
 	PiDL::runFace(frame, face);
-	PiDL::quit();
 	
 	return 0;
 }

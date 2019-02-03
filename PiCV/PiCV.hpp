@@ -25,16 +25,12 @@ namespace PiCV {
 	void showLandmark(cv::Mat & img, Landmark & landmark);
 	void showEEM(cv::Mat & img, EEM & eem);
 
-	// extern cv::VideoCapture _capt;
-	// extern cv::Mat _frame;
 	extern "C"
 	{
-		extern cv::VideoCapture _capt;
-		extern cv::Mat _frame;
-
 		bool setupVideo(char video_path[]);
 		bool readVideoFrame();
 		bool showVideoFrame();
+		bool getVideoFrame(cv::Mat & frame);
 		bool run();
 	}
 }

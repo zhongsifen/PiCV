@@ -40,9 +40,7 @@ namespace PiDL {
 	void tdlib(Gray & gray, Gray_D & gray_d);
 
 	extern "C" {
-		bool setup(char video_path[]);
-		bool quit();
-		bool run();
+		bool setup();
 		bool runFace(Image &frame, Face &face);
 	}
 }; // namespace PiDL
