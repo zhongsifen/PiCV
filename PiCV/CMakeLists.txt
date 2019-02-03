@@ -18,5 +18,4 @@ target_link_libraries(PiCV LINK_PUBLIC
     ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_imgproc.dylib
     ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_highgui.dylib
     ${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_videoio.dylib
-    /usr/local/opt/lapack/lib/liblapack.dylib
 )

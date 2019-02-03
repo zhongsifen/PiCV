@@ -5,6 +5,9 @@ add_library(PiDL SHARED
 	dlib_anet.hpp
 	dlib_cv.hpp
 )
+set_target_properties(PiDL PROPERTIES
+    SUFFIX .so
+)
 
 target_include_directories(PiDL PUBLIC
 	${CMAKE_SOURCE_DIR}

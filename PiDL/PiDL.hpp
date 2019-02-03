@@ -28,11 +28,6 @@ namespace PiDL {
 	const std::string _DAT_SP( _MODELDAT + "shape_predictor_68_face_landmarks.dat");
 	const std::string _DAT_NET(_MODELDAT + "dlib_face_recognition_resnet_model_v1.dat");
 
-	bool setup(char video_path[]);
-	bool quit();
-	bool run();
-	bool runFace(Image & frame, Face & face);
-
 	bool doFace(Gray & gray, Face & face);
 	bool doLandmark(Gray & gray, cv::Rect & r, Landmark & landmark);
 	bool doChip(Image & image, cv::Rect & r, Chip & chip);
@@ -43,6 +38,13 @@ namespace PiDL {
 	void fdlib(Gray_D & gray_d, Gray & gray);
 	void tdlib(Image & image, Image_D & image_d);
 	void tdlib(Gray & gray, Gray_D & gray_d);
-};
+
+	extern "C" {
+		bool setup(char video_path[]);
+		bool quit();
+		bool run();
+		bool runFace(Image &frame, Face &face);
+	}
+}; // namespace PiDL
 
 #endif /* PiDL_hpp */

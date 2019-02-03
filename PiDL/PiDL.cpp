@@ -8,7 +8,7 @@
 
 #include "PiDL.hpp"
 #include "dlib_cv.hpp"
-#include <opencv2/opencv.hpp>
+// #include <opencv2/opencv.hpp>
 
 //#include <dlib/gui_widgets.h>
 
@@ -16,31 +16,7 @@ namespace PiDL {
 	dlib::frontal_face_detector _fd;
 	dlib::shape_predictor _sp;
 	dlib_anet::anet_type _net;
-
-	cv::VideoCapture _capt;
 } // namespace PiDL
-
-bool PiDL::setup(char video_path[])
-{
-		if (video_path == nullptr)
-		{
-			_capt.open(0);
-		}
-		else
-		{
-			_capt.open(video_path);
-		}
-		if (!_capt.isOpened())
-			return false;
-		// cv::Size sz((int)capt.get(cv::CAP_PROP_FRAME_WIDTH),
-		// 			(int)capt.get(cv::CAP_PROP_FRAME_HEIGHT));
-
-		_fd = dlib::get_frontal_face_detector();
-		dlib::deserialize(_DAT_SP) >> _sp;
-		dlib::deserialize(_DAT_NET) >> _net;
-
-		return true;
-}
 
 bool PiDL::quit()
 {
@@ -49,36 +25,23 @@ bool PiDL::quit()
 
 bool PiDL::run()
 {
-	cv::Mat frame;
-	for (;;)
-	{
-		_capt.read(frame);
-		if (frame.empty())
-			break;
-
-		////////////////////////////////// Show frame /////////////////////////////////////////////
-		cv::imshow("PiCV", frame);
-		int key = cv::waitKey(5);
-		if (key == 27)
-			break;
-	}
-	
 	return true;
 }
 
 bool PiDL::runFace(Image & frame, Face & face)
 {
-	for (;;) {
-		_capt.read(frame);		if (frame.empty()) break;
-		Gray gray;
-		toGray(frame, gray);
-		doFace(gray, face);
+	// for (;;) {
+	// 	_capt.read(frame);		if (frame.empty()) break;
+	// 	Gray gray;
+	// 	toGray(frame, gray);
+	// 	doFace(gray, face);
 
-		cv::Mat s = frame.clone();
-		showFace(s, face);
-		cv::imshow("PiCV", s);
-		int key = cv::waitKey(5);		if (key == 27) break;
-	}
+	// 	cv::Mat s = frame.clone();
+	// 	showFace(s, face);
+	// 	cv::imshow("PiCV", s);
+	// 	int key = cv::waitKey(5);		if (key == 27) break;
+	// }
+	
 	return true;
 }
 

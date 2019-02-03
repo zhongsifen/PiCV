@@ -7,6 +7,12 @@
 
 #include "_PiCV.hpp"
 
+namespace PiCV
+{
+cv::VideoCapture _capt;
+cv::Mat _frame;
+} // namespace PiCV
+
 bool PiCV::toGray(Image & image, Gray & gray)
 {
 	cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
