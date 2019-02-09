@@ -8,43 +8,51 @@
 
 #include "PiDL.hpp"
 #include "dlib_cv.hpp"
-// #include <opencv2/opencv.hpp>
-
-//#include <dlib/gui_widgets.h>
 
 namespace PiDL {
 	dlib::frontal_face_detector _fd;
 	dlib::shape_predictor _sp;
 	dlib_anet::anet_type _net;
+
+	Image _frame;
+	Gray _gray;
+	Face _face;
+
+	Stage _stage = NONE;
 } // namespace PiDL
 
-bool PiDL::setup() {
-	_fd = dlib::get_frontal_face_detector();
-	dlib::deserialize(_DAT_SP) >> _sp;
-	dlib::deserialize(_DAT_NET) >> _net;
+bool PiDL::setup()
+{
+	bool ret = true;
+	ret = doInit();		if (ret == false) return false;
 
 	return true;
 }
 
 bool PiDL::runFace(Image & frame, Face & face)
 {
-	// for (;;) {
-	// 	_capt.read(frame);		if (frame.empty()) break;
-	// 	Gray gray;
-	// 	toGray(frame, gray);
-	// 	doFace(gray, face);
+	bool ret = true;
+	ret = toGray(_frame, _gray);	if (!ret) return false;
+	ret = doFace(_gray, _face);		if (!ret) return false;
+	frame = _frame;
+	face = _face;
 
-	// 	cv::Mat s = frame.clone();
-	// 	showFace(s, face);
-	// 	cv::imshow("PiCV", s);
-	// 	int key = cv::waitKey(5);		if (key == 27) break;
-	// }
-	
+	return true;
+}
+
+bool PiDL::doInit() {
+	_fd = dlib::get_frontal_face_detector();
+	dlib::deserialize(_DAT_SP) >> _sp;
+	dlib::deserialize(_DAT_NET) >> _net;
+
+	_stage = INIT;
 	return true;
 }
 
 bool PiDL::doFace(Gray & gray, Face & face)
 {
+	if (_stage < INIT) return false;
+
 	std::vector<std::pair<double, dlib::rectangle>> dets;
 	_fd(dlib::cv_image<uint8_t>(gray), dets);
 
@@ -61,6 +69,7 @@ bool PiDL::doFace(Gray & gray, Face & face)
 
 	dlib_cv::fdlib(dets[i].second, face);
 
+	_stage = FACE;
 	return true;
 }
 

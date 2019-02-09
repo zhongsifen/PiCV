@@ -29,8 +29,8 @@ namespace PiCV {
 	{
 		bool setupVideo(char video_path[]);
 		bool readVideoFrame();
-		bool showVideoFrame();
-		bool getVideoFrame(cv::Mat & frame);
+		bool getVideoFrame(Image & frame);
+		bool showFrame(Image &frame);
 		bool run();
 	}
 }

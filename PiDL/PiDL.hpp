@@ -24,24 +24,34 @@ namespace PiDL {
 	typedef dlib::matrix<float, 0, 1> Desc_D;
 	typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_D;
 
-	const std::string _MODELDAT(PiDLConfig::_M);
-	const std::string _DAT_SP( _MODELDAT + "shape_predictor_68_face_landmarks.dat");
-	const std::string _DAT_NET(_MODELDAT + "dlib_face_recognition_resnet_model_v1.dat");
-
-	bool doFace(Gray & gray, Face & face);
-	bool doLandmark(Gray & gray, cv::Rect & r, Landmark & landmark);
-	bool doChip(Image & image, cv::Rect & r, Chip & chip);
-	bool doDesc(Chip & chip, Desc & desc);
-	bool doDesc(Image & image, cv::Rect & r, Chip & chip, Desc & desc);
-	
 	void fdlib(Image_D & image_d, Image & image);
 	void fdlib(Gray_D & gray_d, Gray & gray);
 	void tdlib(Image & image, Image_D & image_d);
 	void tdlib(Gray & gray, Gray_D & gray_d);
+	
+	typedef enum {
+		NONE,
+		INIT,
+		FACE,
+		LANDMARK,
+		CHIP,
+	} 
+	Stage;
 
-	extern "C" {
+	bool doInit();
+	bool doFace(Gray &gray, Face &face);
+	bool doLandmark(Gray &gray, cv::Rect &r, Landmark &landmark);
+	bool doChip(Image &image, cv::Rect &r, Chip &chip);
+	bool doDesc(Chip &chip, Desc &desc);
+	bool doDesc(Image &image, cv::Rect &r, Chip &chip, Desc &desc);
+
+	extern "C"
+	{
 		bool setup();
-		bool runFace(Image &frame, Face &face);
+		bool runFace(Image & frame, Face & face);
+		bool runLandmark(Image & frame, Face & face, Landmark &landmark);
+		bool runChip(Image & frame, Chip & chip);
+		bool runDesc(Image & frame, Chip & chip, Desc & desc);
 	}
 }; // namespace PiDL
 
