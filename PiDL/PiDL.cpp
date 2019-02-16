@@ -75,10 +75,10 @@ bool PiDL::doFace(Gray & gray, Face & face)
 
 bool PiDL::doLandmark(Gray & gray, cv::Rect & r, Landmark & landmark)
 {
-	dlib::cv_image<uint8_t> gray_d(gray);
-	dlib::rectangle r_d;
-	dlib_cv::tdlib(r, r_d);
-	dlib::full_object_detection shape = _sp(gray_d, r_d);
+	dlib::cv_image<uint8_t> gray_dl(gray);
+	dlib::rectangle r_dl;
+	dlib_cv::tdlib(r, r_dl);
+	dlib::full_object_detection shape = _sp(gray_dl, r_dl);
 	int n = shape.num_parts();
 	if (n < 1) return false;
 	landmark.resize(n);
@@ -91,24 +91,24 @@ bool PiDL::doLandmark(Gray & gray, cv::Rect & r, Landmark & landmark)
 
 bool PiDL::doChip(Image & image, cv::Rect & r, Chip & chip)
 {
-	Image_D image_d;
-	tdlib(image, image_d);
-	dlib::rectangle r_d;
-	dlib_cv::tdlib(r, r_d);
-	dlib::full_object_detection shape = _sp(image_d, r_d);
+	Image_DL image_dl;
+	tdlib(image, image_dl);
+	dlib::rectangle r_dl;
+	dlib_cv::tdlib(r, r_dl);
+	dlib::full_object_detection shape = _sp(image_dl, r_dl);
 	int n = shape.num_parts();	if (n < 1) return false;
-	Chip_D chip_d;
-	extract_image_chip(image_d, get_face_chip_details(shape, 150, 0.25), chip_d);
-	fdlib(chip_d, chip);
+	Chip_DL chip_dl;
+	extract_image_chip(image_dl, get_face_chip_details(shape, 150, 0.25), chip_dl);
+	fdlib(chip_dl, chip);
 
 	return true;
 }
 
 bool PiDL::doDesc(Chip & chip, Desc & desc)
 {
-	Chip_D chip_d;
-	tdlib(chip, chip_d);
-	std::vector<Chip_D> chips(1, chip_d);
+	Chip_DL chip_dl;
+	tdlib(chip, chip_dl);
+	std::vector<Chip_DL> chips(1, chip_dl);
 	desc = dlib::toMat(_net(chips)[0]);
 
 	return true;
@@ -116,46 +116,46 @@ bool PiDL::doDesc(Chip & chip, Desc & desc)
 
 bool PiDL::doDesc(Image & image, cv::Rect & r, Chip & chip, Desc & desc)
 {
-	Image_D image_d;
-	tdlib(image, image_d);
+	Image_DL image_dl;
+	tdlib(image, image_dl);
 	Gray gray;
 	PiCV::toGray(image, gray);
-	Gray_D gray_d;
-	tdlib(gray, gray_d);
-	dlib::rectangle r_d;
-	dlib_cv::tdlib(r, r_d);
-	dlib::full_object_detection shape = _sp(gray_d, r_d);
+	Gray_DL gray_dl;
+	tdlib(gray, gray_dl);
+	dlib::rectangle r_dl;
+	dlib_cv::tdlib(r, r_dl);
+	dlib::full_object_detection shape = _sp(gray_dl, r_dl);
 	int n = shape.num_parts();
 	if (n < 1) return false;
-	Chip_D chip_d;
-	extract_image_chip(image_d, get_face_chip_details(shape, 150, 0.25), chip_d);
-	chip = dlib::toMat(chip_d);
-	std::vector<Chip_D> chips(1, chip_d);
+	Chip_DL chip_dl;
+	extract_image_chip(image_dl, get_face_chip_details(shape, 150, 0.25), chip_dl);
+	chip = dlib::toMat(chip_dl);
+	std::vector<Chip_DL> chips(1, chip_dl);
 	desc = dlib::toMat(_net(chips)[0]);
 
 	return true;
 }
 
-void PiDL::fdlib(Image_D & image_d, Image & image)
+void PiDL::fdlib(Image_DL & image_dl, Image & image)
 {
-	cv::Mat image_r(num_rows(image_d), num_columns(image_d), CV_8UC3, image_data(image_d), width_step(image_d));
+	cv::Mat image_r(num_rows(image_dl), num_columns(image_dl), CV_8UC3, image_data(image_dl), width_step(image_dl));
 	cv::cvtColor(image_r, image, cv::COLOR_RGB2BGR);
 }
 
-void PiDL::fdlib(Gray_D & gray_d, Gray & gray)
+void PiDL::fdlib(Gray_DL & gray_dl, Gray & gray)
 {
-	cv::Mat gray_r(num_rows(gray_d), num_columns(gray_d), CV_8UC3, image_data(gray_d), width_step(gray_d));
+	cv::Mat gray_r(num_rows(gray_dl), num_columns(gray_dl), CV_8UC3, image_data(gray_dl), width_step(gray_dl));
 	gray = gray_r.clone();
 }
 
-void PiDL::tdlib(Image & image, Image_D & image_d)
+void PiDL::tdlib(Image & image, Image_DL & image_dl)
 {
-	ImageCV_D imagecv_d(image);
-	dlib::assign_image(image_d, imagecv_d);
+	ImageCV_DL imagecv_dl(image);
+	dlib::assign_image(image_dl, imagecv_dl);
 }
 
-void PiDL::tdlib(Gray & gray, Gray_D & gray_d)
+void PiDL::tdlib(Gray & gray, Gray_DL & gray_dl)
 {
-	ImageCV_D graycv_d(gray);
-	dlib::assign_image(gray_d, graycv_d);
+	ImageCV_DL graycv_dl(gray);
+	dlib::assign_image(gray_dl, graycv_dl);
 }

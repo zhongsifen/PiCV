@@ -18,16 +18,16 @@ using namespace PiCV;
 #include <dlib/opencv.h>
 
 namespace PiDL {
-	typedef dlib::matrix<dlib::rgb_pixel> Image_D;
-	typedef dlib::matrix<unsigned char> Gray_D;
-	typedef dlib::matrix<dlib::rgb_pixel> Chip_D;
-	typedef dlib::matrix<float, 0, 1> Desc_D;
-	typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_D;
+	typedef dlib::matrix<dlib::rgb_pixel> Image_DL;
+	typedef dlib::matrix<unsigned char> Gray_DL;
+	typedef dlib::matrix<dlib::rgb_pixel> Chip_DL;
+	typedef dlib::matrix<float, 0, 1> Desc_DL;
+	typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_DL;
 
-	void fdlib(Image_D & image_d, Image & image);
-	void fdlib(Gray_D & gray_d, Gray & gray);
-	void tdlib(Image & image, Image_D & image_d);
-	void tdlib(Gray & gray, Gray_D & gray_d);
+	void fdlib(Image_DL & image_d, Image & image);
+	void fdlib(Gray_DL & gray_d, Gray & gray);
+	void tdlib(Image & image, Image_DL & image_d);
+	void tdlib(Gray & gray, Gray_DL & gray_d);
 	
 	typedef enum {
 		NONE,

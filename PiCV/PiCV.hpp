@@ -30,7 +30,10 @@ namespace PiCV {
 		bool setupVideo(char video_path[]);
 		bool readVideoFrame();
 		bool getVideoFrame(Image & frame);
-		bool showFrame(Image &frame);
+		bool showFrame(Image & frame);
+		bool showFrameFace(Image & frame, Face & face);
+	
+		bool setup();
 		bool run();
 	}
 }

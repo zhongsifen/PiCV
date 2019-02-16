@@ -13,15 +13,17 @@ bool PiCV::readVideoFrame() {
 	return true;
 }
 
-bool PiCV::showVideoFrame(Image & frame) {
-	cv::imshow("PiCV", frame);
-	if (cv::waitKey(5) == 27) return false;
+bool PiCV::getVideoFrame(Image & frame) { 
+	frame = _frame;
 
 	return true;
 }
 
-bool PiCV::getVideoFrame(Image & frame) { 
-	frame = _frame;
+bool PiCV::showFrame(Image &frame)
+{
+	cv::imshow("PiCV", frame);
+	if (cv::waitKey(5) == 27)
+		return false;
 
 	return true;
 }
@@ -33,7 +35,7 @@ bool PiCV::run()
 	for (;;) {
 		ret = readVideoFrame();			if (!ret) break;
 		ret = getVideoFrame(frame);		if (!ret) break;
-		ret = showVideoFrame(frame);	if (!ret) break;
+		ret = showFrame(frame);	if (!ret) break;
 	}
 
 	return true;
