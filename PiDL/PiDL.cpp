@@ -10,15 +10,15 @@
 #include "dlib_cv.hpp"
 
 namespace PiDL {
-	dlib::frontal_face_detector _fd;
-	dlib::shape_predictor _sp;
-	dlib_anet::anet_type _net;
+extern dlib::frontal_face_detector _fd;
+extern dlib::shape_predictor _sp;
+extern dlib_anet::anet_type _net;
 
-	Image _frame;
-	Gray _gray;
-	Face _face;
+Image _frame;
+Gray _gray;
+Face _face;
 
-	Stage _stage = NONE;
+Stage _stage = NONE;
 } // namespace PiDL
 
 bool PiDL::setup()

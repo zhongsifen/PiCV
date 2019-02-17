@@ -1,7 +1,9 @@
 add_library(PiDL SHARED
 	PiDL.cpp
-	PiDL.hpp
+	_PiDL.cpp
 	PiDLConfig.hpp
+	PiDL.hpp
+	_PiDL.hpp
 	dlib_anet.hpp
 	dlib_cv.hpp
 )

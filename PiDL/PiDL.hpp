@@ -20,6 +20,7 @@ using namespace PiCV;
 namespace PiDL {
 	typedef dlib::matrix<dlib::rgb_pixel> Image_DL;
 	typedef dlib::matrix<unsigned char> Gray_DL;
+	typedef dlib::rectangle Face_DL;
 	typedef dlib::matrix<dlib::rgb_pixel> Chip_DL;
 	typedef dlib::matrix<float, 0, 1> Desc_DL;
 	typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_DL;
