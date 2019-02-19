@@ -25,7 +25,15 @@ namespace PiCV {
 	void showLandmark(cv::Mat & img, Landmark & landmark);
 	void showEEM(cv::Mat & img, EEM & eem);
 
-	extern "C" {
-		void run(char * path);
+	extern "C"
+	{
+		bool setupVideo(char video_path[]);
+		bool readVideoFrame(Image & frame);
+		bool getVideoFrame(Image & frame);
+		bool showFrame(Image & frame);
+		bool drawFace(Image & frame, Face & face);
+	
+		bool setup();
+		bool run();
 	}
 }

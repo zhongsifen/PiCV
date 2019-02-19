@@ -1,9 +1,13 @@
 add_library(PiDL SHARED
 	PiDL.cpp
-	PiDL.hpp
 	PiDLConfig.hpp
+	PiDL.hpp
+	_PiDL.hpp
 	dlib_anet.hpp
 	dlib_cv.hpp
+)
+set_target_properties(PiDL PROPERTIES
+    SUFFIX .so
 )
 
 target_include_directories(PiDL PUBLIC
