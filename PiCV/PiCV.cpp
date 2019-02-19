@@ -30,6 +30,13 @@ bool PiCV::showFrame(Image &frame)
 	return true;
 }
 
+bool PiCV::drawFace(Image &frame, Face &face)
+{
+	cv::rectangle(frame, face, cv::Scalar(0x00, 0xFF, 0x00));
+
+	return true;
+}
+
 bool PiCV::run()
 {
 	bool ret = true;

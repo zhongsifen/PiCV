@@ -12,6 +12,7 @@ int main() {
 	for (;;) {
 		ret = readVideoFrame(frame);			if (!ret) break;
 		ret = runFace(frame, face);
+		ret = drawFace(frame, face);
 		ret = showFrame(frame);	if (!ret) break;
 	}
 	// PiDL::runFace(frame, face);
