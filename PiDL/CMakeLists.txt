@@ -1,6 +1,5 @@
 add_library(PiDL SHARED
 	PiDL.cpp
-	_PiDL.cpp
 	PiDLConfig.hpp
 	PiDL.hpp
 	_PiDL.hpp

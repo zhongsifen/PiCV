@@ -7,8 +7,10 @@ bool PiCV::setupVideo(char video_path[]) {
 	return _capt.isOpened();
 }
 
-bool PiCV::readVideoFrame() {
+bool PiCV::readVideoFrame(Image & frame)
+{
 	_capt.read(_frame); if (_frame.empty()) return false;
+	frame = _frame;
 
 	return true;
 }
@@ -33,9 +35,8 @@ bool PiCV::run()
 	bool ret = true;
 	Image frame;
 	for (;;) {
-		ret = readVideoFrame();			if (!ret) break;
-		ret = getVideoFrame(frame);		if (!ret) break;
-		ret = showFrame(frame);	if (!ret) break;
+		ret = readVideoFrame(frame);	if (!ret) break;
+		ret = showFrame(frame);			if (!ret) break;
 	}
 
 	return true;

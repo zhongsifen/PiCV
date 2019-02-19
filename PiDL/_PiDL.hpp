@@ -12,7 +12,8 @@
 
 namespace PiDL {
     bool dlInit();
-    bool dlFace(Gray &gray, Face &face);
+    bool dlGray(Image_DL & image, Gray_DL & gray);
+    bool dlFace(Gray_DL &gray, Face_DL &face);
     bool dlLandmark(Gray &gray, cv::Rect &r, Landmark &landmark);
     bool dlChip(Image &image, cv::Rect &r, Chip &chip);
     bool dlDesc(Chip &chip, Desc &desc);

@@ -28,7 +28,7 @@ namespace PiCV {
 	extern "C"
 	{
 		bool setupVideo(char video_path[]);
-		bool readVideoFrame();
+		bool readVideoFrame(Image & frame);
 		bool getVideoFrame(Image & frame);
 		bool showFrame(Image & frame);
 		bool showFrameFace(Image & frame, Face & face);
