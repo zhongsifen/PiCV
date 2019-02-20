@@ -23,4 +23,6 @@ target_link_libraries(PiDL LINK_PUBLIC
 	${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_imgproc.so
 	${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_highgui.so
 	${CMAKE_SOURCE_DIR}/opencv/build/install/lib/libopencv_videoio.so
+	/usr/lib/libcblas.so
+	/usr/lib/liblapack.so
 )

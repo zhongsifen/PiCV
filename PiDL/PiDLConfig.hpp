@@ -3,7 +3,7 @@
 #include <string>
 
 namespace PiDL {
-	const std::string _M("/Users/zhongsifen/Work/dlib_model/");
+	const std::string _M("/home/pi/Work/dlib_model/");
 	// const std::string _D("/Users/zhongsifen/Work/Mien58_data/");
 	// const std::string _N("/Users/zhongsifen/Work/MienParam/mtcnn/");
 	// const std::string _S("/Users/zhongsifen/Work/MienParam/seeta/");
