@@ -73,7 +73,11 @@ bool PiDL::dlFace(Gray_DL & gray, Face_DL & face)
     return true;
 }
 
-bool PiDL::dlLandmark(Gray &gray, cv::Rect &r, Landmark &landmark);
+bool PiDL::dlLandmark(Gray_DL &gray, Face_DL &face, Landmark_DL &landmark)
+{
+    return true;
+}
+
 bool PiDL::dlChip(Image &image, cv::Rect &r, Chip &chip);
 bool PiDL::dlDesc(Chip &chip, Desc &desc);
 bool PiDL::dlDesc(Image &image, cv::Rect &r, Chip &chip, Desc &desc);
