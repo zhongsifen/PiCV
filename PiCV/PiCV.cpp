@@ -24,7 +24,7 @@ bool PiCV::getVideoFrame(Image & frame) {
 bool PiCV::showFrame(Image &frame)
 {
 	cv::imshow("PiCV", frame);
-	if (cv::waitKey(5) == 27)
+	if (cv::waitKey(1) == 27)
 		return false;
 
 	return true;
@@ -33,6 +33,17 @@ bool PiCV::showFrame(Image &frame)
 bool PiCV::drawFace(Image &frame, Face &face)
 {
 	cv::rectangle(frame, face, cv::Scalar(0x00, 0xFF, 0x00));
+
+	return true;
+}
+
+bool PiCV::drawLandmark(Image &frame, Landmark &landmark)
+{
+	int n = landmark.size();	if (n<1) return false;
+	for (int i=0; i<n; i++) {
+		cv::circle(frame, landmark[i], 4, cv::Scalar(0xF0, 0xF0, 0xF0));
+		// printf("(x, y) = (%d, %d)\n", landmark[i].x, landmark[i].y);
+	}
 
 	return true;
 }

@@ -29,6 +29,7 @@ namespace PiDL {
 	void fdl(Image_DL & image_d, Image & image);
 	void fdl(Gray_DL & gray_d, Gray & gray);
 	void fdl(Face_DL & face_dl, Face & face);
+	void fdl(Landmark_DL & landmark_dl, Landmark & Landmark);
 	void tdl(Image & image, Image_DL & image_d);
 	void tdl(Gray & gray, Gray_DL & gray_d);
 	
@@ -52,7 +53,7 @@ namespace PiDL {
 	{
 		bool setup();
 		bool runFace(Image & frame, Face & face);
-		bool runLandmark(Image & frame, Face & face, Landmark &landmark);
+		bool runLandmark(Image & frame, Landmark &landmark);
 		bool runChip(Image & frame, Chip & chip);
 		bool runDesc(Image & frame, Chip & chip, Desc & desc);
 	}

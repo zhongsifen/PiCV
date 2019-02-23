@@ -12,6 +12,7 @@ dlib_anet::anet_type _net;
 Image_DL _frame_dl;
 Gray_DL _gray_dl;
 Face_DL _face_dl;
+Landmark_DL _landmark_dl;
 Chip_DL _chip_dl;
 
 } // namespace PiDL
@@ -32,6 +33,18 @@ bool PiDL::runFace(Image & frame, Face & face)
     ret = dlFace(_gray_dl, _face_dl);   if (!ret) return false;
     fdl(_face_dl, face);
 
+    return true;
+}
+
+bool PiDL::runLandmark(Image &frame, Landmark &landmark)
+{
+    bool ret = true;
+    tdl(frame, _frame_dl);
+    ret = dlGray(_frame_dl, _gray_dl);  if (!ret) return false;
+    ret = dlFace(_gray_dl, _face_dl);   if (!ret) return false;
+    ret = dlLandmark(_gray_dl, _face_dl, _landmark_dl); if (!ret) return false;
+    fdl(_landmark_dl, landmark);
+ 
     return true;
 }
 
@@ -75,6 +88,13 @@ bool PiDL::dlFace(Gray_DL & gray, Face_DL & face)
 
 bool PiDL::dlLandmark(Gray_DL &gray, Face_DL &face, Landmark_DL &landmark)
 {
+    dlib::full_object_detection fo = _sp(gray, face);
+    int n = fo.num_parts();   if (n<1) return false;
+    landmark.resize(n);
+    for (int i=0; i<n; i++) {
+        landmark[i] = fo.part(i);
+    }
+
     return true;
 }
 
@@ -100,6 +120,17 @@ void PiDL::fdl(Face_DL &face_dl, Face &face)
     face.y = (int)face_dl.top();
     face.width = (int)(face_dl.right() - face_dl.left() + 1);
     face.height = (int)(face_dl.bottom() - face_dl.top() + 1);
+}
+
+void PiDL::fdl(Landmark_DL &landmark_dl, Landmark &landmark)
+{
+    int n = landmark_dl.size();
+    landmark.resize(n);
+    for (int i = 0; i < n; i++)
+    {
+        landmark[i].x = landmark_dl[i].x();
+        landmark[i].y = landmark_dl[i].y();
+    }
 }
 
 void PiDL::tdl(Image &image, Image_DL &image_dl)

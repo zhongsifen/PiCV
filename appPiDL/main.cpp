@@ -7,15 +7,17 @@ int main() {
 
 	PiCV::Image frame;
 	PiCV::Face face;
+	PiCV::Landmark landmark;
 	PiCV::setupVideo(video_path);
 	PiDL::setup();
 	for (;;) {
 		ret = readVideoFrame(frame);			if (!ret) break;
 		ret = runFace(frame, face);
+		ret = runLandmark(frame, landmark);
 		ret = drawFace(frame, face);
+		ret = drawLandmark(frame, landmark);
 		ret = showFrame(frame);	if (!ret) break;
 	}
-	// PiDL::runFace(frame, face);
 
 	return 0;
 }

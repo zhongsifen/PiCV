@@ -8,7 +8,7 @@ namespace PiCV {
 	typedef cv::Mat Image;
 	typedef cv::Mat_<uint8_t> Gray;
 	typedef cv::Rect Face;
-	typedef std::vector<cv::Point2f> Landmark;
+	typedef std::vector<cv::Point> Landmark;
 	typedef std::vector<cv::Point2f> EEM;
 	typedef cv::Mat Chip;
 	typedef cv::Mat Desc;
@@ -32,7 +32,8 @@ namespace PiCV {
 		bool getVideoFrame(Image & frame);
 		bool showFrame(Image & frame);
 		bool drawFace(Image & frame, Face & face);
-	
+		bool drawLandmark(Image &frame, Landmark &landmark);
+
 		bool setup();
 		bool run();
 	}
