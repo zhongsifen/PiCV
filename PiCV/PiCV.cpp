@@ -30,6 +30,13 @@ bool PiCV::showFrame(Image &frame)
 	return true;
 }
 
+bool PiCV::showChip(Image &frame)
+{
+	cv::imshow("PiCV: Chip", frame);
+
+	return true;
+}
+
 bool PiCV::drawFace(Image &frame, Face &face)
 {
 	cv::rectangle(frame, face, cv::Scalar(0x00, 0xFF, 0x00));
@@ -42,7 +49,6 @@ bool PiCV::drawLandmark(Image &frame, Landmark &landmark)
 	int n = landmark.size();	if (n<1) return false;
 	for (int i=0; i<n; i++) {
 		cv::circle(frame, landmark[i], 4, cv::Scalar(0xF0, 0xF0, 0xF0));
-		// printf("(x, y) = (%d, %d)\n", landmark[i].x, landmark[i].y);
 	}
 
 	return true;

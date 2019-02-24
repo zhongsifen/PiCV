@@ -31,6 +31,7 @@ namespace PiCV {
 		bool readVideoFrame(Image & frame);
 		bool getVideoFrame(Image & frame);
 		bool showFrame(Image & frame);
+		bool showChip(Chip & chip);
 		bool drawFace(Image & frame, Face & face);
 		bool drawLandmark(Image &frame, Landmark &landmark);
 
