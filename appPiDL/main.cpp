@@ -13,13 +13,13 @@ int main() {
 	PiCV::setupVideo(video_path);
 	PiDL::setup();
 	for (;;) {
-		ret = readVideoFrame(frame);			if (!ret) break;
-		ret = runFace(frame, face);
-		ret = runLandmark(frame, landmark);
-		ret = runChip(frame, chip);
-		ret = drawFace(frame, face);
-		ret = drawLandmark(frame, landmark);
-		ret = showFrame(frame);	if (!ret) break;
+		ret = readVideoFrame(frame);			if (!ret) continue;
+		ret = runFace(frame, face);				if (!ret) continue;
+		ret = runLandmark(frame, landmark);		if (!ret) continue;
+		ret = runChip(frame, chip);				if (!ret) continue;
+		ret = drawFace(frame, face);			if (!ret) continue;
+		ret = drawLandmark(frame, landmark);	if (!ret) continue;
+		ret = showFrame(frame);					if (!ret) break;
 		ret = showChip(chip);
 	}
 
