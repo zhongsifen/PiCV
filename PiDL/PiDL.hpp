@@ -22,15 +22,16 @@ namespace PiDL {
 	typedef dlib::matrix<unsigned char> Gray_DL;
 	typedef dlib::rectangle Face_DL;
 	typedef dlib::full_object_detection Shape_DL;
-	typedef std::vector<dlib::point> Landmark_DL;
 	typedef dlib::matrix<dlib::rgb_pixel> Chip_DL;
 	typedef dlib::matrix<float, 0, 1> Desc_DL;
+
 	typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_DL;
 
 	void fdl(Image_DL & image_d, Image & image);
 	void fdl(Gray_DL & gray_d, Gray & gray);
 	void fdl(Face_DL & face_dl, Face & face);
-	void fdl(Landmark_DL & landmark_dl, Landmark & Landmark);
+	void fdl(Shape_DL &shape_dl, Landmark &landmark);
+	void fdl(Desc_DL &desc_dl, Desc &desc);
 	
 	void tdl(Image & image, Image_DL & image_d);
 	void tdl(Gray & gray, Gray_DL & gray_d);
@@ -57,7 +58,7 @@ namespace PiDL {
 		bool runFace(Image & frame, Face & face);
 		bool runLandmark(Image & frame, Landmark &landmark);
 		bool runChip(Image & frame, Chip & chip);
-		bool runDesc(Image & frame, Chip & chip, Desc & desc);
+		bool runDesc(Image & frame, Desc & desc);
 	}
 }; // namespace PiDL
 

@@ -13,8 +13,8 @@ Image_DL _frame_dl;
 Gray_DL _gray_dl;
 Face_DL _face_dl;
 Shape_DL _shape_dl;
-Landmark_DL _landmark_dl;
 Chip_DL _chip_dl;
+Desc_DL _desc_dl;
 
 } // namespace PiDL
 
@@ -44,8 +44,7 @@ bool PiDL::runLandmark(Image &frame, Landmark &landmark)
     ret = dlGray(_frame_dl, _gray_dl);  if (!ret) return false;
     ret = dlFace(_gray_dl, _face_dl);   if (!ret) return false;
     ret = dlShape(_gray_dl, _face_dl, _shape_dl); if (!ret) return false;
-    ret = dlLandmark(_shape_dl, _landmark_dl); if (!ret) return false;
-    fdl(_landmark_dl, landmark);
+    fdl(_shape_dl, landmark);
  
     return true;
 }
@@ -59,6 +58,20 @@ bool PiDL::runChip(Image &frame, Chip &chip)
     ret = dlShape(_gray_dl, _face_dl, _shape_dl); if (!ret) return false;
     ret = dlChip(_frame_dl, _shape_dl, _chip_dl); if (!ret) return false;
     fdl(_chip_dl, chip);
+
+    return true;
+}
+
+bool PiDL::runDesc(Image &frame, Desc &desc)
+{
+    bool ret = true;
+    tdl(frame, _frame_dl);
+    ret = dlGray(_frame_dl, _gray_dl);  if (!ret) return false;
+    ret = dlFace(_gray_dl, _face_dl);   if (!ret) return false;
+    ret = dlShape(_gray_dl, _face_dl, _shape_dl); if (!ret) return false;
+    ret = dlChip(_frame_dl, _shape_dl, _chip_dl); if (!ret) return false;
+    ret = dlDesc(_chip_dl, _desc_dl);
+    fdl(_desc_dl, desc);
 
     return true;
 }
@@ -111,21 +124,22 @@ bool PiDL::dlShape(Gray_DL &gray, Face_DL &face, Shape_DL &shape)
     return true;
 }
 
-bool PiDL::dlLandmark(Shape_DL &shape, Landmark_DL &landmark)
-{
-    int n = shape.num_parts();   if (n<1) return false;
-    landmark.resize(n);
-    for (int i=0; i<n; i++) {
-        landmark[i] = shape.part(i);
-    }
-
-    return true;
-}
-
 bool PiDL::dlChip(Image_DL &image,  Shape_DL &shape, Chip_DL &chip)
 {
     if (shape.num_parts() < 1) return false;
     dlib::extract_image_chip(image, dlib::get_face_chip_details(shape, 150, 0.25), chip);
+
+    return true;
+}
+
+bool PiDL::dlDesc(Chip_DL &chip, Desc_DL &desc)
+{
+    std::vector<Chip_DL> chips(1, chip);
+    std::vector<Desc_DL> descs(1);
+
+    descs = _net(chips);
+
+    desc = descs[0];
 
     return true;
 }
@@ -151,14 +165,21 @@ void PiDL::fdl(Face_DL &face_dl, Face &face)
     face.height = (int)(face_dl.bottom() - face_dl.top() + 1);
 }
 
-void PiDL::fdl(Landmark_DL &landmark_dl, Landmark &landmark)
+void PiDL::fdl(Shape_DL &shape_dl, Landmark &landmark)
 {
-    int n = landmark_dl.size();
+    int n = shape_dl.num_parts();
     landmark.resize(n);
-    for (int i = 0; i < n; i++)
-    {
-        landmark[i].x = landmark_dl[i].x();
-        landmark[i].y = landmark_dl[i].y();
+    for (int i=0; i<n; i++) {
+        landmark[i].x = shape_dl.part(i).x();
+        landmark[i].y = shape_dl.part(i).y();
+    }
+}
+void PiDL::fdl(Desc_DL &desc_dl, Desc &desc)
+{
+    int n = desc_dl.nr();
+    desc.create(n, 1, CV_32FC1);
+    for (int i=0; i<n; i++) {
+        desc.at<float>(i) = desc_dl(i);
     }
 }
 

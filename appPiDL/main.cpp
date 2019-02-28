@@ -9,6 +9,7 @@ int main() {
 	PiCV::Face face;
 	PiCV::Landmark landmark;
 	PiCV::Chip chip;
+	PiCV::Desc desc;
 
 	PiCV::setupVideo(video_path);
 	PiDL::setup();
@@ -17,6 +18,7 @@ int main() {
 		ret = runFace(frame, face);				if (!ret) continue;
 		ret = runLandmark(frame, landmark);		if (!ret) continue;
 		ret = runChip(frame, chip);				if (!ret) continue;
+		ret = runDesc(frame, desc);
 		ret = drawFace(frame, face);			if (!ret) continue;
 		ret = drawLandmark(frame, landmark);	if (!ret) continue;
 		ret = showFrame(frame);					if (!ret) break;
