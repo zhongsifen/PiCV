@@ -71,12 +71,10 @@ bool PiCV::toChipTri(Image & image, Landmark & landmark, EEM & tri, cv::Size & b
 
 bool PiCV::toMeasure(Desc & d1, Desc & d2, float & measure)
 {
-	float* data1 = (float*)d1.data;
-	float* data2 = (float*)d2.data;
-	int n = _ndv;	// d1.rows;
+	int n = d1.size();
 	float s = 0.0F;
 	for (int i = 0; i < n; i++) {
-		float r = data1[i] - data2[i];
+		float r = d1[i] - d2[i];
 		s += r * r;
 	}
 	s /= (float)n;

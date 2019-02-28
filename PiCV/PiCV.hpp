@@ -11,7 +11,7 @@ namespace PiCV {
 	typedef std::vector<cv::Point> Landmark;
 	typedef std::vector<cv::Point2f> EEM;
 	typedef cv::Mat Chip;
-	typedef cv::Mat Desc;
+	typedef std::vector<float> Desc;
 	
 	const int _nfp =  68;	// number of feature points
 	const int _ndv = 128;	// number of description values

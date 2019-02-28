@@ -177,9 +177,9 @@ void PiDL::fdl(Shape_DL &shape_dl, Landmark &landmark)
 void PiDL::fdl(Desc_DL &desc_dl, Desc &desc)
 {
     int n = desc_dl.nr();
-    desc.create(n, 1, CV_32FC1);
+    desc.resize(n);
     for (int i=0; i<n; i++) {
-        desc.at<float>(i) = desc_dl(i);
+        desc[i] = desc_dl(i);
     }
 }
 
