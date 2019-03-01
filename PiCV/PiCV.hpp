@@ -13,8 +13,8 @@ namespace PiCV {
 	typedef cv::Mat Chip;
 	typedef std::vector<float> Desc;
 	
-	const int _nfp =  68;	// number of feature points
-	const int _ndv = 128;	// number of description values
+	// const int _nfp =  68;	// number of feature points
+	// const int _ndv = 128;	// number of description values
 	
 	bool toGray(Image & image, Gray & gray);
 	bool toEEM(Landmark & landmark, EEM & eem);
