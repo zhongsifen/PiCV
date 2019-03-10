@@ -24,7 +24,7 @@ namespace PiDL {
 	typedef dlib::matrix<dlib::rgb_pixel> Chip_DL;
 	typedef dlib::matrix<float, 0, 1> Desc_DL;
 
-	typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_DL;
+	// typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_DL;
 
 	void fdl(Image_DL & image_d, PiCV::Image & image);
 	void fdl(Gray_DL &gray_d, PiCV::Gray &gray);
@@ -35,14 +35,14 @@ namespace PiDL {
 	void tdl(PiCV::Image &image, Image_DL &image_d);
 	void tdl(PiCV::Gray &gray, Gray_DL &gray_d);
 
-	typedef enum {
-		NONE,
-		INIT,
-		FACE,
-		LANDMARK,
-		CHIP,
-	} 
-	Stage;
+	// typedef enum {
+	// 	NONE,
+	// 	INIT,
+	// 	FACE,
+	// 	LANDMARK,
+	// 	CHIP,
+	// } 
+	// Stage;
 
 	// bool doInit();
 	// bool doFace(Gray &gray, Face &face);

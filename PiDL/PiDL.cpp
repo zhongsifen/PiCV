@@ -184,12 +184,12 @@ void PiDL::fdl(Desc_DL &desc_dl, PiCV::Desc &desc)
 
 void PiDL::tdl(PiCV::Image &image, Image_DL &image_dl)
 {
-    ImageCV_DL imagecv_dl(image);
+    dlib::cv_image<dlib::bgr_pixel> imagecv_dl(image);
     dlib::assign_image(image_dl, imagecv_dl);
 }
 
 void PiDL::tdl(PiCV::Gray &gray, Gray_DL &gray_dl)
 {
-    ImageCV_DL graycv_dl(gray);
+    dlib::cv_image<dlib::bgr_pixel> graycv_dl(gray);
     dlib::assign_image(gray_dl, graycv_dl);
 }
