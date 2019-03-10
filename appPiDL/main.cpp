@@ -1,5 +1,4 @@
 #include "PiDL/PiDL.hpp"
-using namespace PiDL;
 
 char * video_path = nullptr; //{ (char*)"/Users/zhongsifen/Data/48.3gp" };
 int main() {
@@ -14,15 +13,15 @@ int main() {
 	PiCV::setupVideo(video_path);
 	PiDL::setup();
 	for (;;) {
-		ret = readVideoFrame(frame);			if (!ret) continue;
-		ret = runFace(frame, face);				if (!ret) continue;
-		ret = runLandmark(frame, landmark);		if (!ret) continue;
-		ret = runChip(frame, chip);				if (!ret) continue;
-		ret = runDesc(frame, desc);
-		ret = drawFace(frame, face);			if (!ret) continue;
-		ret = drawLandmark(frame, landmark);	if (!ret) continue;
-		ret = showFrame(frame);					if (!ret) break;
-		ret = showChip(chip);
+		ret = PiCV::readVideoFrame(frame);			if (!ret) continue;
+		ret = PiDL::runFace(frame, face);			if (!ret) continue;
+		ret = PiDL::runLandmark(frame, landmark);	if (!ret) continue;
+		ret = PiDL::runChip(frame, chip);			if (!ret) continue;
+		ret = PiDL::runDesc(frame, desc);
+		ret = PiCV::drawFace(frame, face);			if (!ret) continue;
+		ret = PiCV::drawLandmark(frame, landmark);	if (!ret) continue;
+		ret = PiCV::showFrame(frame);				if (!ret) break;
+		ret = PiCV::showChip(chip);
 	}
 
 	return 0;

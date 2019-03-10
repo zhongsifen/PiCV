@@ -10,7 +10,6 @@
 #define PiDL_hpp
 
 #include "PiCV/PiCV.hpp"
-using namespace PiCV;
 #include "PiDLConfig.hpp"
 #include <opencv2/opencv.hpp>
 #include "dlib_anet.hpp"
@@ -27,15 +26,15 @@ namespace PiDL {
 
 	typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_DL;
 
-	void fdl(Image_DL & image_d, Image & image);
-	void fdl(Gray_DL & gray_d, Gray & gray);
-	void fdl(Face_DL & face_dl, Face & face);
-	void fdl(Shape_DL &shape_dl, Landmark &landmark);
-	void fdl(Desc_DL &desc_dl, Desc &desc);
-	
-	void tdl(Image & image, Image_DL & image_d);
-	void tdl(Gray & gray, Gray_DL & gray_d);
-	
+	void fdl(Image_DL & image_d, PiCV::Image & image);
+	void fdl(Gray_DL &gray_d, PiCV::Gray &gray);
+	void fdl(Face_DL &face_dl, PiCV::Face &face);
+	void fdl(Shape_DL &shape_dl, PiCV::Landmark &landmark);
+	void fdl(Desc_DL &desc_dl, PiCV::Desc &desc);
+
+	void tdl(PiCV::Image &image, Image_DL &image_d);
+	void tdl(PiCV::Gray &gray, Gray_DL &gray_d);
+
 	typedef enum {
 		NONE,
 		INIT,
@@ -45,20 +44,20 @@ namespace PiDL {
 	} 
 	Stage;
 
-	bool doInit();
-	bool doFace(Gray &gray, Face &face);
-	bool doLandmark(Gray &gray, cv::Rect &r, Landmark &landmark);
-	bool doChip(Image &image, cv::Rect &r, Chip &chip);
-	bool doDesc(Chip &chip, Desc &desc);
-	bool doDesc(Image &image, cv::Rect &r, Chip &chip, Desc &desc);
+	// bool doInit();
+	// bool doFace(Gray &gray, Face &face);
+	// bool doLandmark(Gray &gray, cv::Rect &r, Landmark &landmark);
+	// bool doChip(Image &image, cv::Rect &r, Chip &chip);
+	// bool doDesc(Chip &chip, Desc &desc);
+	// bool doDesc(Image &image, cv::Rect &r, Chip &chip, Desc &desc);
 
 	extern "C"
 	{
 		bool setup();
-		bool runFace(Image & frame, Face & face);
-		bool runLandmark(Image & frame, Landmark &landmark);
-		bool runChip(Image & frame, Chip & chip);
-		bool runDesc(Image & frame, Desc & desc);
+		bool runFace(PiCV::Image &frame, PiCV::Face &face);
+		bool runLandmark(PiCV::Image &frame, PiCV::Landmark &landmark);
+		bool runChip(PiCV::Image &frame, PiCV::Chip &chip);
+		bool runDesc(PiCV::Image &frame, PiCV::Desc &desc);
 	}
 }; // namespace PiDL
 

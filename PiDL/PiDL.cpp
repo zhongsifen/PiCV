@@ -26,7 +26,7 @@ bool PiDL::setup()
     return true;
 }
 
-bool PiDL::runFace(Image & frame, Face & face)
+bool PiDL::runFace(PiCV::Image &frame, PiCV::Face &face)
 {
     bool ret = true;
     tdl(frame, _frame_dl);
@@ -37,7 +37,7 @@ bool PiDL::runFace(Image & frame, Face & face)
     return true;
 }
 
-bool PiDL::runLandmark(Image &frame, Landmark &landmark)
+bool PiDL::runLandmark(PiCV::Image &frame, PiCV::Landmark &landmark)
 {
     bool ret = true;
     tdl(frame, _frame_dl);
@@ -49,7 +49,7 @@ bool PiDL::runLandmark(Image &frame, Landmark &landmark)
     return true;
 }
 
-bool PiDL::runChip(Image &frame, Chip &chip)
+bool PiDL::runChip(PiCV::Image &frame, PiCV::Chip &chip)
 {
     bool ret = true;
     tdl(frame, _frame_dl);
@@ -62,7 +62,7 @@ bool PiDL::runChip(Image &frame, Chip &chip)
     return true;
 }
 
-bool PiDL::runDesc(Image &frame, Desc &desc)
+bool PiDL::runDesc(PiCV::Image &frame, PiCV::Desc &desc)
 {
     bool ret = true;
     tdl(frame, _frame_dl);
@@ -144,20 +144,19 @@ bool PiDL::dlDesc(Chip_DL &chip, Desc_DL &desc)
     return true;
 }
 
-
-void PiDL::fdl(Image_DL &image_dl, Image &image)
+void PiDL::fdl(Image_DL &image_dl, PiCV::Image &image)
 {
     cv::Mat image_r(num_rows(image_dl), num_columns(image_dl), CV_8UC3, image_data(image_dl), width_step(image_dl));
     cv::cvtColor(image_r, image, cv::COLOR_RGB2BGR);
 }
 
-void PiDL::fdl(Gray_DL &gray_dl, Gray &gray)
+void PiDL::fdl(Gray_DL &gray_dl, PiCV::Gray &gray)
 {
     cv::Mat gray_r(num_rows(gray_dl), num_columns(gray_dl), CV_8UC3, image_data(gray_dl), width_step(gray_dl));
     gray = gray_r.clone();
 }
 
-void PiDL::fdl(Face_DL &face_dl, Face &face)
+void PiDL::fdl(Face_DL &face_dl, PiCV::Face &face)
 {
     face.x = (int)face_dl.left();
     face.y = (int)face_dl.top();
@@ -165,7 +164,7 @@ void PiDL::fdl(Face_DL &face_dl, Face &face)
     face.height = (int)(face_dl.bottom() - face_dl.top() + 1);
 }
 
-void PiDL::fdl(Shape_DL &shape_dl, Landmark &landmark)
+void PiDL::fdl(Shape_DL &shape_dl, PiCV::Landmark &landmark)
 {
     int n = shape_dl.num_parts();
     landmark.resize(n);
@@ -174,7 +173,7 @@ void PiDL::fdl(Shape_DL &shape_dl, Landmark &landmark)
         landmark[i].y = shape_dl.part(i).y();
     }
 }
-void PiDL::fdl(Desc_DL &desc_dl, Desc &desc)
+void PiDL::fdl(Desc_DL &desc_dl, PiCV::Desc &desc)
 {
     int n = desc_dl.nr();
     desc.resize(n);
@@ -183,13 +182,13 @@ void PiDL::fdl(Desc_DL &desc_dl, Desc &desc)
     }
 }
 
-void PiDL::tdl(Image &image, Image_DL &image_dl)
+void PiDL::tdl(PiCV::Image &image, Image_DL &image_dl)
 {
     ImageCV_DL imagecv_dl(image);
     dlib::assign_image(image_dl, imagecv_dl);
 }
 
-void PiDL::tdl(Gray &gray, Gray_DL &gray_dl)
+void PiDL::tdl(PiCV::Gray &gray, Gray_DL &gray_dl)
 {
     ImageCV_DL graycv_dl(gray);
     dlib::assign_image(gray_dl, graycv_dl);
