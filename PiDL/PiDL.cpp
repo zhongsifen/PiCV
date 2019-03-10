@@ -9,12 +9,12 @@ dlib::frontal_face_detector _fd;
 dlib::shape_predictor _sp;
 dlib_anet::anet_type _net;
 
-Image_DL _frame_dl;
-Gray_DL _gray_dl;
-Face_DL _face_dl;
-Shape_DL _shape_dl;
-Chip_DL _chip_dl;
-Desc_DL _desc_dl;
+Image _frame_dl;
+GrayImage _gray_dl;
+FaceImage _face_dl;
+ShapeImage _shape_dl;
+ChipImage _chip_dl;
+DescImage _desc_dl;
 
 } // namespace PiDL
 
@@ -86,13 +86,13 @@ bool PiDL::dlInit()
     return true;
 }
 
-bool PiDL::dlGray(Image_DL & image, Gray_DL & gray)
+bool PiDL::dlGray(Image & image, GrayImage & gray)
 {
-    dlib::assign_image<Gray_DL, Image_DL>(gray, image);
+    dlib::assign_image<GrayImage, Image>(gray, image);
     return true;
 }
 
-bool PiDL::dlFace(Gray_DL & gray, Face_DL & face)
+bool PiDL::dlFace(GrayImage & gray, FaceImage & face)
 {
     std::vector<std::pair<double, dlib::rectangle>> dets;
     _fd(gray, dets);
@@ -115,7 +115,7 @@ bool PiDL::dlFace(Gray_DL & gray, Face_DL & face)
     return true;
 }
 
-bool PiDL::dlShape(Gray_DL &gray, Face_DL &face, Shape_DL &shape)
+bool PiDL::dlShape(GrayImage &gray, FaceImage &face, ShapeImage &shape)
 {
     dlib::full_object_detection fo = _sp(gray, face);
     int n = fo.num_parts();     if (n < 1) return false;
@@ -124,7 +124,7 @@ bool PiDL::dlShape(Gray_DL &gray, Face_DL &face, Shape_DL &shape)
     return true;
 }
 
-bool PiDL::dlChip(Image_DL &image,  Shape_DL &shape, Chip_DL &chip)
+bool PiDL::dlChip(Image &image,  ShapeImage &shape, ChipImage &chip)
 {
     if (shape.num_parts() < 1) return false;
     dlib::extract_image_chip(image, dlib::get_face_chip_details(shape, 150, 0.25), chip);
@@ -132,10 +132,10 @@ bool PiDL::dlChip(Image_DL &image,  Shape_DL &shape, Chip_DL &chip)
     return true;
 }
 
-bool PiDL::dlDesc(Chip_DL &chip, Desc_DL &desc)
+bool PiDL::dlDesc(ChipImage &chip, DescImage &desc)
 {
-    std::vector<Chip_DL> chips(1, chip);
-    std::vector<Desc_DL> descs(1);
+    std::vector<ChipImage> chips(1, chip);
+    std::vector<DescImage> descs(1);
 
     descs = _net(chips);
 
@@ -144,19 +144,19 @@ bool PiDL::dlDesc(Chip_DL &chip, Desc_DL &desc)
     return true;
 }
 
-void PiDL::fdl(Image_DL &image_dl, PiCV::Image &image)
+void PiDL::fdl(Image &image_dl, PiCV::Image &image)
 {
     cv::Mat image_r(num_rows(image_dl), num_columns(image_dl), CV_8UC3, image_data(image_dl), width_step(image_dl));
     cv::cvtColor(image_r, image, cv::COLOR_RGB2BGR);
 }
 
-void PiDL::fdl(Gray_DL &gray_dl, PiCV::Gray &gray)
+void PiDL::fdl(GrayImage &gray_dl, PiCV::Gray &gray)
 {
     cv::Mat gray_r(num_rows(gray_dl), num_columns(gray_dl), CV_8UC3, image_data(gray_dl), width_step(gray_dl));
     gray = gray_r.clone();
 }
 
-void PiDL::fdl(Face_DL &face_dl, PiCV::Face &face)
+void PiDL::fdl(FaceImage &face_dl, PiCV::Face &face)
 {
     face.x = (int)face_dl.left();
     face.y = (int)face_dl.top();
@@ -164,7 +164,7 @@ void PiDL::fdl(Face_DL &face_dl, PiCV::Face &face)
     face.height = (int)(face_dl.bottom() - face_dl.top() + 1);
 }
 
-void PiDL::fdl(Shape_DL &shape_dl, PiCV::Landmark &landmark)
+void PiDL::fdl(ShapeImage &shape_dl, PiCV::Landmark &landmark)
 {
     int n = shape_dl.num_parts();
     landmark.resize(n);
@@ -173,7 +173,7 @@ void PiDL::fdl(Shape_DL &shape_dl, PiCV::Landmark &landmark)
         landmark[i].y = shape_dl.part(i).y();
     }
 }
-void PiDL::fdl(Desc_DL &desc_dl, PiCV::Desc &desc)
+void PiDL::fdl(DescImage &desc_dl, PiCV::Desc &desc)
 {
     int n = desc_dl.nr();
     desc.resize(n);
@@ -182,13 +182,13 @@ void PiDL::fdl(Desc_DL &desc_dl, PiCV::Desc &desc)
     }
 }
 
-void PiDL::tdl(PiCV::Image &image, Image_DL &image_dl)
+void PiDL::tdl(PiCV::Image &image, Image &image_dl)
 {
     dlib::cv_image<dlib::bgr_pixel> imagecv_dl(image);
     dlib::assign_image(image_dl, imagecv_dl);
 }
 
-void PiDL::tdl(PiCV::Gray &gray, Gray_DL &gray_dl)
+void PiDL::tdl(PiCV::Gray &gray, GrayImage &gray_dl)
 {
     dlib::cv_image<dlib::bgr_pixel> graycv_dl(gray);
     dlib::assign_image(gray_dl, graycv_dl);

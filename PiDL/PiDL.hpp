@@ -17,23 +17,23 @@
 #include <dlib/opencv.h>
 
 namespace PiDL {
-	typedef dlib::matrix<dlib::rgb_pixel> Image_DL;
-	typedef dlib::matrix<unsigned char> Gray_DL;
-	typedef dlib::rectangle Face_DL;
-	typedef dlib::full_object_detection Shape_DL;
-	typedef dlib::matrix<dlib::rgb_pixel> Chip_DL;
-	typedef dlib::matrix<float, 0, 1> Desc_DL;
+	typedef dlib::matrix<dlib::rgb_pixel> Image;
+	typedef dlib::matrix<unsigned char> GrayImage;
+	typedef dlib::rectangle FaceImage;
+	typedef dlib::full_object_detection ShapeImage;
+	typedef dlib::matrix<dlib::rgb_pixel> ChipImage;
+	typedef dlib::matrix<float, 0, 1> DescImage;
 
-	// typedef dlib::cv_image<dlib::bgr_pixel> ImageCV_DL;
+	// typedef dlib::cv_image<dlib::bgr_pixel> ImageCVImage;
 
-	void fdl(Image_DL & image_d, PiCV::Image & image);
-	void fdl(Gray_DL &gray_d, PiCV::Gray &gray);
-	void fdl(Face_DL &face_dl, PiCV::Face &face);
-	void fdl(Shape_DL &shape_dl, PiCV::Landmark &landmark);
-	void fdl(Desc_DL &desc_dl, PiCV::Desc &desc);
+	void fdl(Image & image_d, PiCV::Image & image);
+	void fdl(GrayImage &gray_d, PiCV::Gray &gray);
+	void fdl(FaceImage &face_dl, PiCV::Face &face);
+	void fdl(ShapeImage &shape_dl, PiCV::Landmark &landmark);
+	void fdl(DescImage &desc_dl, PiCV::Desc &desc);
 
-	void tdl(PiCV::Image &image, Image_DL &image_d);
-	void tdl(PiCV::Gray &gray, Gray_DL &gray_d);
+	void tdl(PiCV::Image &image, Image &image_d);
+	void tdl(PiCV::Gray &gray, GrayImage &gray_d);
 
 	// typedef enum {
 	// 	NONE,
