@@ -1,8 +1,8 @@
 add_library(PiCV SHARED
     PiCV.cpp
     PiCV.hpp
-    _PiCV.cpp
-    _PiCV.hpp
+#    _PiCV.cpp
+#    _PiCV.hpp
 )
 set_target_properties(PiCV PROPERTIES
     SUFFIX .so

@@ -7,11 +7,6 @@
 
 #include "_PiCV.hpp"
 
-namespace PiCV {
-	cv::VideoCapture _capt;
-	cv::Mat _frame;
-} // namespace PiCV
-
 bool PiCV::toGray(Image & image, Gray & gray)
 {
 	cv::cvtColor(image, gray, cv::COLOR_BGR2GRAY);
@@ -61,14 +56,6 @@ bool PiCV::toChipTri(Image & image, Landmark & landmark, EEM & tri, cv::Size & b
 	return true;
 }
 
-//bool PiCV::toChipTri(Image & image, EEM & eem, EEM & tri, cv::Size & box, Chip & chip)
-//{
-//	cv::Mat aff = cv::getAffineTransform(eem, tri);
-//	cv::warpAffine(image, chip, aff, box);
-//
-//	return true;
-//}
-
 bool PiCV::toMeasure(Desc & d1, Desc & d2, float & measure)
 {
 	int n = d1.size();
@@ -84,20 +71,3 @@ bool PiCV::toMeasure(Desc & d1, Desc & d2, float & measure)
 }
 
 
-void PiCV::showFace(cv::Mat & img, Face & face)
-{
-	cv::rectangle(img, face, cv::Scalar(0x00, 0xFF, 0x00));
-}
-
-void PiCV::showLandmark(cv::Mat & img, Landmark & landmark)
-{
-	for (int k = 0; k < landmark.size(); k++) {
-		cv::circle(img, landmark[k], 2, cv::Scalar(0x00, 0x00, 0xFF));
-	}
-}
-
-void PiCV::showEEM(cv::Mat & img, EEM & eem) {
-	for (int k = 0; k < eem.size(); k++) {
-		cv::circle(img, eem[k], 2, cv::Scalar(0xFF, 0xFF, 0x00));
-	}
-}

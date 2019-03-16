@@ -11,45 +11,38 @@
 
 #include "PiCV/PiCV.hpp"
 #include "PiDLConfig.hpp"
-#include <opencv2/opencv.hpp>
 #include "dlib_anet.hpp"
 #include <dlib/image_processing/frontal_face_detector.h>
 #include <dlib/opencv.h>
+#include <opencv2/core.hpp>
 
 namespace PiDL {
 	typedef dlib::matrix<dlib::rgb_pixel> Image;
-	typedef dlib::matrix<unsigned char> GrayImage;
-	typedef dlib::rectangle FaceImage;
-	typedef dlib::full_object_detection ShapeImage;
-	typedef dlib::matrix<dlib::rgb_pixel> ChipImage;
-	typedef dlib::matrix<float, 0, 1> DescImage;
+	typedef dlib::matrix<unsigned char> Gray;
+	typedef dlib::rectangle Face;
+	typedef dlib::full_object_detection Shape;
+	typedef dlib::matrix<dlib::rgb_pixel> Chip;
+	typedef dlib::matrix<float, 0, 1> Desc;
 
-	// typedef dlib::cv_image<dlib::bgr_pixel> ImageCVImage;
+	typedef struct
+	{
+		Face face;
+		Shape shape;
+		Chip chip;
+		Desc desc;
+	} Feat;
 
 	void fdl(Image & image_d, PiCV::Image & image);
-	void fdl(GrayImage &gray_d, PiCV::Gray &gray);
-	void fdl(FaceImage &face_dl, PiCV::Face &face);
-	void fdl(ShapeImage &shape_dl, PiCV::Landmark &landmark);
-	void fdl(DescImage &desc_dl, PiCV::Desc &desc);
+	void fdl(Gray &gray_d, PiCV::Gray &gray);
+	void fdl(Face &face_dl, PiCV::Face &face);
+	void fdl(Shape &shape_dl, PiCV::Landmark &landmark);
+	void fdl(Desc &desc_dl, PiCV::Desc &desc);
+	
+	void fdl(Feat &feat_dl, PiCV::Feat &feat);
 
 	void tdl(PiCV::Image &image, Image &image_d);
-	void tdl(PiCV::Gray &gray, GrayImage &gray_d);
+	void tdl(PiCV::Gray &gray, Gray &gray_d);
 
-	// typedef enum {
-	// 	NONE,
-	// 	INIT,
-	// 	FACE,
-	// 	LANDMARK,
-	// 	CHIP,
-	// } 
-	// Stage;
-
-	// bool doInit();
-	// bool doFace(Gray &gray, Face &face);
-	// bool doLandmark(Gray &gray, cv::Rect &r, Landmark &landmark);
-	// bool doChip(Image &image, cv::Rect &r, Chip &chip);
-	// bool doDesc(Chip &chip, Desc &desc);
-	// bool doDesc(Image &image, cv::Rect &r, Chip &chip, Desc &desc);
 
 	extern "C"
 	{
@@ -58,6 +51,8 @@ namespace PiDL {
 		bool runLandmark(PiCV::Image &frame, PiCV::Landmark &landmark);
 		bool runChip(PiCV::Image &frame, PiCV::Chip &chip);
 		bool runDesc(PiCV::Image &frame, PiCV::Desc &desc);
+
+		bool runFeat(void* image, void* feat);
 	}
 }; // namespace PiDL
 

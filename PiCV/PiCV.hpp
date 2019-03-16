@@ -17,6 +17,8 @@ typedef cv::Mat Chip;
 typedef std::vector<float> Desc;
 
 typedef struct {
+	Face face;
+	Landmark landmark;
 	Chip chip;
 	Desc desc;
 }
@@ -27,19 +29,17 @@ bool toEEM(Landmark &landmark, EEM &eem);
 bool toChipTri(Image &image, Landmark &landmark, EEM &tri, cv::Size &box, Chip &chip);
 bool toMeasure(Desc &d1, Desc &d2, float &measure);
 
-void showFace(cv::Mat &img, Face &face);
-void showLandmark(cv::Mat &img, Landmark &landmark);
-void showEEM(cv::Mat &img, EEM &eem);
 
 extern "C"
 {
 	bool setupVideo(char video_path[]);
 	bool readVideoFrame(Image &frame);
 	bool getVideoFrame(Image &frame);
-	bool showFrame(Image &frame);
+	bool showImage(Image &image);
 	bool showChip(Chip &chip);
 	bool drawFace(Image &frame, Face &face);
 	bool drawLandmark(Image &frame, Landmark &landmark);
+	bool showFeat(Image &image, Feat &feat);
 
 	bool setup();
 	bool run();

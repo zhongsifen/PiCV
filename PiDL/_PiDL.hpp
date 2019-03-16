@@ -7,14 +7,13 @@
 
 namespace PiDL {
     bool dlInit();
-    bool dlGray(Image & image, GrayImage & gray);
-    bool dlFace(GrayImage & gray, FaceImage & face);
-    bool dlShape(GrayImage &gray, FaceImage &face, ShapeImage &shape);
-    bool dlChip(Image &image, ShapeImage &shape, ChipImage &chip);
-    bool dlDesc(ChipImage &chip, DescImage &desc);
-    // bool dlDesc(Image &image, cv::Rect &r, Chip &chip, Desc &desc);
-
-    bool descr(cv::Mat &cvimg, dlib::matrix<rgb_pixel> &chip, dlib::matrix<float, 0, 1> &descr);
-}
+    bool dlGray(Image & image, Gray & gray);
+    bool dlFace(Gray & gray, Face & face);
+    bool dlShape(Gray &gray, Face &face, Shape &shape);
+    bool dlChip(Image &image, Shape &shape, Chip &chip);
+    bool dlDesc(Chip &chip, Desc &desc);
+    
+    bool dlFeat(Image &image, Feat &feat);
+ }
 
 #endif // _PiDL_hpp

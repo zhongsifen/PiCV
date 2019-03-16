@@ -1,5 +1,11 @@
 #include "_PiCV.hpp"
 
+namespace PiCV
+{
+cv::VideoCapture _capt;
+cv::Mat _frame;
+} // namespace PiCV
+
 bool PiCV::setupVideo(char video_path[]) {
 	if (video_path == nullptr) _capt.open(0);
 	else _capt.open(video_path);
@@ -21,11 +27,10 @@ bool PiCV::getVideoFrame(Image & frame) {
 	return true;
 }
 
-bool PiCV::showFrame(Image &frame)
+bool PiCV::showImage(Image &frame)
 {
 	cv::imshow("PiCV", frame);
-	if (cv::waitKey(1) == 27)
-		return false;
+	if (cv::waitKey(1) == 27) return false;
 
 	return true;
 }
@@ -33,6 +38,19 @@ bool PiCV::showFrame(Image &frame)
 bool PiCV::showChip(Image &frame)
 {
 	cv::imshow("PiCV: Chip", frame);
+	if (cv::waitKey(1) == 27) return false;
+
+	return true;
+}
+
+bool PiCV::showFeat(Image &image, Feat &feat)
+{
+	bool ret = true;
+
+	ret = showChip(feat.chip);	if (!ret) return false;
+	drawFace(image, feat.face);
+	drawLandmark(image, feat.landmark);
+	showImage(image);	if (!ret) return false;
 
 	return true;
 }
@@ -60,7 +78,7 @@ bool PiCV::run()
 	Image frame;
 	for (;;) {
 		ret = readVideoFrame(frame);	if (!ret) break;
-		ret = showFrame(frame);			if (!ret) break;
+		ret = showImage(frame);			if (!ret) break;
 	}
 
 	return true;
