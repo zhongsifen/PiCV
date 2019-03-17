@@ -1,9 +1,8 @@
-#include "_PiCV.hpp"
+#include "PiCV.hpp"
 
 namespace PiCV
 {
 cv::VideoCapture _capt;
-cv::Mat _frame;
 } // namespace PiCV
 
 bool PiCV::setupVideo(char video_path[]) {
@@ -13,16 +12,9 @@ bool PiCV::setupVideo(char video_path[]) {
 	return _capt.isOpened();
 }
 
-bool PiCV::readVideoFrame(Image & frame)
+bool PiCV::readVideo(Image &image)
 {
-	_capt.read(_frame); if (_frame.empty()) return false;
-	frame = _frame;
-
-	return true;
-}
-
-bool PiCV::getVideoFrame(Image & frame) { 
-	frame = _frame;
+	_capt.read(image); if (image.empty()) return false;
 
 	return true;
 }
@@ -77,7 +69,7 @@ bool PiCV::run()
 	bool ret = true;
 	Image frame;
 	for (;;) {
-		ret = readVideoFrame(frame);	if (!ret) break;
+		ret = readVideo(frame);	if (!ret) break;
 		ret = showImage(frame);			if (!ret) break;
 	}
 

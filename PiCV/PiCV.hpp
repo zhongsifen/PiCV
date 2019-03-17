@@ -24,17 +24,11 @@ typedef struct {
 }
 Feat;
 
-bool toGray(Image &image, Gray &gray);
-bool toEEM(Landmark &landmark, EEM &eem);
-bool toChipTri(Image &image, Landmark &landmark, EEM &tri, cv::Size &box, Chip &chip);
-bool toMeasure(Desc &d1, Desc &d2, float &measure);
-
 
 extern "C"
 {
 	bool setupVideo(char video_path[]);
-	bool readVideoFrame(Image &frame);
-	bool getVideoFrame(Image &frame);
+	bool readVideo(Image &image);
 	bool showImage(Image &image);
 	bool showChip(Chip &chip);
 	bool drawFace(Image &frame, Face &face);
