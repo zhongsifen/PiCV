@@ -64,13 +64,20 @@ bool PiCV::drawLandmark(Image &frame, Landmark &landmark)
 	return true;
 }
 
+// bool PiCV::setup()
+// {
+// 	setupVideo(0);
+//
+// 	return true;
+// }
+
 bool PiCV::run()
 {
 	bool ret = true;
 	Image frame;
 	for (;;) {
-		ret = readVideo(frame);	if (!ret) break;
-		ret = showImage(frame);			if (!ret) break;
+		ret = readVideo(frame);		if (!ret) break;
+		ret = showImage(frame);		if (!ret) break;
 	}
 
 	return true;
