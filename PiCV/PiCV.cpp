@@ -64,14 +64,16 @@ bool PiCV::drawLandmark(Image &frame, Landmark &landmark)
 	return true;
 }
 
-// bool PiCV::setup()
-// {
-// 	setupVideo(0);
-//
-// 	return true;
-// }
+bool PiCV::cv_setup(char video_path[])
+{
+	bool ret = true;
 
-bool PiCV::run()
+	ret = setupVideo(0);	if (!ret) return false;
+
+	return true;
+}
+
+bool PiCV::cv_run()
 {
 	bool ret = true;
 	Image frame;

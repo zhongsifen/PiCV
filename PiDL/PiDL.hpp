@@ -44,8 +44,8 @@ namespace PiDL {
 	void tdl(PiCV::Gray &gray, Gray &gray_d);
 
 
-	extern "C"
-	{
+	// extern "C"
+	// {
 		bool setup();
 		bool runFace(PiCV::Image &frame, PiCV::Face &face);
 		bool runLandmark(PiCV::Image &frame, PiCV::Landmark &landmark);
@@ -53,7 +53,7 @@ namespace PiDL {
 		bool runDesc(PiCV::Image &frame, PiCV::Desc &desc);
 
 		bool runFeat(void* image, void* feat);
-	}
+	// }
 }; // namespace PiDL
 
 #endif /* PiDL_hpp */
