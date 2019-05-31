@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
 from kivy.app import App
 from kivy.uix.widget import Widget
-
+from kivy.uix.image import Image
 
 class PiCV_Widget(Widget):
     pass
@@ -50,12 +50,12 @@ class PiCV_Widget(Widget):
 
 class PiCV_App(App):
     def build(self):
-        self.img1 = Image()
-        layout = BoxLayout()
-        layout.add_widget(self.img1)
-        Clock.schedule_interval(self.update, 1.0/25.0)
+        # self.img1 = Image()
+        # layout = BoxLayout()
+        # layout.add_widget(self.img1)
+        # Clock.schedule_interval(self.update, 1.0/25.0)
 
-        self.capture = cv2.VideoCapture(0)
+        # self.capture = cv2.VideoCapture(0)
         return PiCV_Widget()
 
 
