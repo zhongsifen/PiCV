@@ -14,8 +14,8 @@ target_include_directories(PiDL PUBLIC
 target_link_libraries(PiDL LINK_PUBLIC
 	dlib
 	PiCV
-	${CMAKE_SOURCE_DIR}/lib/libopencv_core.4.0.0.dylib
-	${CMAKE_SOURCE_DIR}/lib/libopencv_imgproc.4.0.0.dylib
-	${CMAKE_SOURCE_DIR}/lib/libopencv_highgui.4.0.0.dylib
-	${CMAKE_SOURCE_DIR}/lib/libopencv_videoio.4.0.0.dylib
+	${CMAKE_SOURCE_DIR}/lib/libopencv_core.4.0.0.so
+	${CMAKE_SOURCE_DIR}/lib/libopencv_imgproc.4.0.0.so
+	${CMAKE_SOURCE_DIR}/lib/libopencv_highgui.4.0.0.so
+	${CMAKE_SOURCE_DIR}/lib/libopencv_videoio.4.0.0.so
 )
