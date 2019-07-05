@@ -1,4 +1,8 @@
-opencv
-dlib
-build
-trash
+include/
+lib/
+.vscode/
+opencv/
+dlib/
+build/
+build_xcode/
+trash/
