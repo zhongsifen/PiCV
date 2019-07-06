@@ -6,7 +6,7 @@ from kivy.graphics.texture import Texture
 import cv2
 
 
-class KivyCamera(Image):
+class KivyCamera(Widget):
     def __init__(self, capture, fps, **kwargs):
         super(KivyCamera, self).__init__(**kwargs)
         self.capture = capture
@@ -27,7 +27,7 @@ class KivyCamera(Image):
 class CamApp(App):
     def build(self):
         self.capture = cv2.VideoCapture(0)
-        self.my_camera = KivyCamera(capture=self.capture, fps=25)
+        self.my_camera = Image(capture=self.capture, fps=25)
         return self.my_camera
 
     def on_stop(self):
