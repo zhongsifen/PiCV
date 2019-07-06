@@ -2,8 +2,8 @@
 
 char * path = nullptr; //{ (char*)"/Users/zhongsifen/Data/48.3gp" };
 int main() {
-	PiCV::setupVideo(path);
-	PiCV::run();
+	PiCV::cv_setup(path);
+	PiCV::cv_run();
 	
 	return 0;
 }

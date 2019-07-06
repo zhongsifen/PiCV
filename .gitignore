@@ -1,7 +1,8 @@
+data/
 include/
 lib/
 .vscode/
-opencv/
+opencv/build*
 dlib/
 build/
 build_xcode/
