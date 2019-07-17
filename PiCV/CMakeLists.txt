@@ -9,6 +9,7 @@ set_target_properties(PiCV PROPERTIES
 )
 
 set(OPENCV_DIR "/home/zhongsifen/Work/minicv/install")
+
 target_include_directories(PiCV PUBLIC
     ${CMAKE_SOURCE_DIR}
     ${OPENCV_DIR}/include/opencv4

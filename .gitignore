@@ -4,6 +4,4 @@ lib/
 .vscode/
 opencv/build*
 dlib/
-build/
-build_xcode/
-trash/
+build*/
