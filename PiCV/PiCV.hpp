@@ -35,8 +35,8 @@ extern "C"
 	bool drawLandmark(Image &frame, Landmark &landmark);
 	bool showFeat(Image &image, Feat &feat);
 
-	bool link(void* mat, uint8_t *data, int32_t *rows, int32_t *cols, int32_t *channels);
-	bool copy(void* mat, uint8_t *data, int32_t *rows, int32_t *cols, int32_t *channels);
+	bool lnk(void* mat, uint8_t *data, int32_t *rows, int32_t *cols, int32_t *channels);
+	bool cpy(void* mat, uint8_t *data, int32_t *rows, int32_t *cols, int32_t *channels);
 
 	bool cv_setup(char video_path[] = nullptr);
 	bool cv_read(Image *image = nullptr);
