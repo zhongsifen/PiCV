@@ -1,1 +1,1 @@
-make -C build
+make -C build_m
