@@ -3,8 +3,6 @@ project(PiCV)
 
 set(CMAKE_CXX_FLAGS, "-std=c++11")
 
-#add_subdirectory(opencv)
-#add_subdirectory(dlib)
 add_subdirectory(PiCV)
 add_subdirectory(PiDL)
 add_subdirectory(appPiCV)
