@@ -10,8 +10,8 @@ set_target_properties(PiDL PROPERTIES
     SUFFIX .so
 )
 
-set(OPENCV_DIR "/home/zhongsifen/Work/minicv/install")
-set(DLIB_DIR "/home/zhongsifen/Work/minidl/install")
+set(OPENCV_DIR ${CMAKE_SOURCE_DIR}/../minicv/install)
+set(DLIB_DIR   ${CMAKE_SOURCE_DIR}/../minidl/install)
 
 target_include_directories(PiDL PUBLIC
 	${CMAKE_SOURCE_DIR}
