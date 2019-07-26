@@ -11,7 +11,7 @@ set_target_properties(PiDL PROPERTIES
 )
 
 set(OPENCV_DIR ${CMAKE_SOURCE_DIR}/../minicv/install)
-set(DLIB_DIR   ${CMAKE_SOURCE_DIR}/../dlib/install)
+set(DLIB_DIR   ${CMAKE_SOURCE_DIR}/../minicv/install)
 
 target_include_directories(PiDL PUBLIC
 	${CMAKE_SOURCE_DIR}
