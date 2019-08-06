@@ -1,0 +1,50 @@
+# File name: PiMien.kv
+#:kivy 1.7.0
+<PiMien>:
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'top'
+        ToolBox:
+            id: _toolbox
+            size_hint: None,None
+            width: 320
+    AnchorLayout:
+        anchor_x: 'right'
+        anchor_y: 'top'
+        RelativeLayout:
+            size_hint: None,None
+            width: root.width - _toolbox.width
+            height: root.height - _menubar.height - _statusbar.height
+            Camera:
+                id: _camera
+                resolution: (640,480)
+                play: False
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                id: _menubar
+                size_hint: 1,None
+                height: 48
+                orientation: 'horizontal'
+                padding: 2
+                Button:
+                    text: 'Start'
+                    on_press: _camera.play = True
+                Button:
+                    text: 'Stop'
+                    on_press: _camera.play = False
+                Button:
+                    text: 'Capture'
+                Button:
+                    text: 'Setup'
+                Button:
+                    text: 'Exit'
+                    on_press: app.stop()
+            StatusBar:
+                id: _statusbar
+                size_hint: 1,None
+                height: 24
+

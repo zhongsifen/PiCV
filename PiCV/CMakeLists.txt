@@ -8,8 +8,6 @@ set_target_properties(PiCV PROPERTIES
     SUFFIX .so
 )
 
-set(OPENCV_DIR ${CMAKE_SOURCE_DIR}/../minicv/install)
-
 target_include_directories(PiCV PUBLIC
     ${CMAKE_SOURCE_DIR}
     ${OPENCV_DIR}/include/opencv4
