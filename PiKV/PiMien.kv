@@ -30,19 +30,24 @@
                 ToolImage:
                     source: 'Pause.png'
             ToolButton:
-                on_press: root.PiStop(*args)
+                on_press: root.PiRefresh(*args)
                 ToolImage:
                     source: 'Stop.png'
     AnchorLayout:
         anchor_x: 'right'
         anchor_y: 'top'
-        RelativeLayout:
+
+        BoxLayout:
             size_hint: None,None
-            width:  root.width  - _toolbox.width 
+            width: root.width - _toolbox.width
             height: root.height - _menubar.height - _statusbar.height
+            orientation: 'vertical'
+            Image:
+                id: _image
+                resolution: (640,450)
             Camera:
                 id: _camera
-                resolution: (640,480)
+                resolution: (640,450)
                 play: True
     AnchorLayout:
         anchor_x: 'center'
@@ -58,7 +63,7 @@
                 padding: 2
                 Button:
                     text: 'Start'
-                    on_press: _camera.play = True
+                    on_press: root.PiStart(*args)
                 Button:
                     text: 'Stop'
                     on_press: _camera.play = False

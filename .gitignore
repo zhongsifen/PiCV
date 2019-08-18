@@ -1,8 +1,10 @@
 _*
+*.ppm
 *.png
 data/
 include/
 lib/
+res/
 .vscode/
 opencv/build*
 dlib/
