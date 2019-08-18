@@ -17,6 +17,8 @@ class PiMien(AnchorLayout):
     
     def __init__(self, **kwargs):
         super(PiMien, self).__init__(**kwargs)
+        self.ids._image.texture = Texture.create(
+            size=(800,450), colorfmt='rgba', bufferfmt='ubyte')
         self.img = None
         self.cam = None
         self.sz = None
@@ -39,13 +41,6 @@ class PiMien(AnchorLayout):
 
     def PiRefresh(self, instance):
         self.img.blit_buffer(pbuffer=self.cam.pixels, size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
-            # size=self.camera.texture.size, colorfmt=self.camera.texture.colorfmt, bufferfmt='ubyte')
-        # self.ids._image.texture.blit_buffer(pbuffer=self.ids._camera.texture.pixels,
-        #                                     size=self.camera.texture.size, colorfmt=self.camera.texture.colorfmt, bufferfmt='ubyte')
-        #     size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
-        # image_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
-        # # display image from the texture
-        # self.texture = image_texture
 
 class PiMienApp(App):
     def build(self):

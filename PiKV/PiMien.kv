@@ -37,18 +37,18 @@
         anchor_x: 'right'
         anchor_y: 'top'
 
-        BoxLayout:
+        GridLayout:
+            cols: 2
             size_hint: None,None
             width: root.width - _toolbox.width
             height: root.height - _menubar.height - _statusbar.height
-            orientation: 'vertical'
-            Image:
-                id: _image
-                resolution: (640,450)
             Camera:
                 id: _camera
                 resolution: (640,450)
                 play: True
+            Image:
+                id: _image
+                resolution: (640,450)
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'bottom'
