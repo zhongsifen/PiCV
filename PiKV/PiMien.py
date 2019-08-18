@@ -1,4 +1,6 @@
 # File name: PiMien.py
+from PIL import Image as PILImage
+
 import kivy
 kivy.require('1.7.0')
 from kivy.app import App
@@ -13,23 +15,14 @@ from kivy.config import Config
 Config.set('graphics', 'width',  '960')
 Config.set('graphics', 'height', '960')
 
+
 class PiMien(AnchorLayout):
     
-    def __init__(self, **kwargs):
-        super(PiMien, self).__init__(**kwargs)
-        self.ids._image.texture = Texture.create(
-            size=(800,450), colorfmt='rgba', bufferfmt='ubyte')
-        self.img = None
-        self.cam = None
-        self.sz = None
-
     def PiStart(self, instance):
         self.cam = self.ids._camera.texture
         self.sz = self.cam.size
-        self.ids._image.texture = Texture.create(size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
-        self.img = self.ids._image.texture
+        self.img = self.ids._image.texture = Texture.create(size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
     
-
     def PiPlay(self, instance):
         self.ids._camera.play = True
 
