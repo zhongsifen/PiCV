@@ -10,6 +10,7 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.image import Image
 from kivy.uix.camera import Camera
 from kivy.graphics.texture import Texture
+from PiCam import PiCam
 
 from kivy.config import Config
 Config.set('graphics', 'width',  '960')
@@ -19,8 +20,9 @@ Config.set('graphics', 'height', '960')
 class PiMien(AnchorLayout):
     
     def PiStart(self, instance):
-        self.cam = self.ids._camera.texture
-        self.sz = self.cam.size
+        self.cam = self.ids._camera
+        self.sz = self.cam.resolution
+        print(self.sz)
         self.img = self.ids._image.texture = Texture.create(size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
     
     def PiPlay(self, instance):
@@ -33,7 +35,10 @@ class PiMien(AnchorLayout):
         self.ids._camera.stop()
 
     def PiRefresh(self, instance):
-        self.img.blit_buffer(pbuffer=self.cam.pixels, size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
+        # self.img.blit_buffer(pbuffer=self.cam.texture.pixels, size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
+        # self.pil = PILImage.frombytes(mode='RGBA', size=self.cam.size, data=self.cam.texture.pixels)
+        self.pil = self.ids._camera.pil()
+        self.pil.show()
 
 class PiMienApp(App):
     def build(self):
