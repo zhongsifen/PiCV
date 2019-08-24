@@ -7,23 +7,32 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.uix.anchorlayout import AnchorLayout
-from kivy.uix.image import Image
+from kivy.uix.image import Image as Monitor
 from kivy.uix.camera import Camera
 from kivy.graphics.texture import Texture
-from PiCam import PiCam
+from PIL import Image as Img
 
 from kivy.config import Config
 Config.set('graphics', 'width',  '960')
 Config.set('graphics', 'height', '960')
 
 
+class PiCam(Camera):
+    def img(self):
+        _img = Img.frombytes(mode='RGBA', size=self.texture.size, data=self.texture.pixels)
+        return _img
+
+class PiMon(Monitor):
+    def setup(self, size):
+        self.texture = Texture.create(size=size, colorfmt='rgba', bufferfmt='ubyte')
+        self.texture.flip_vertical()
+        
+    def mon(self, img):
+        self.texture.blit_buffer(pbuffer=img.tobytes(), size=img.size, colorfmt='rgba', bufferfmt='ubyte')
+
 class PiMien(AnchorLayout):
-    
     def PiStart(self, instance):
-        self.cam = self.ids._camera
-        self.sz = self.cam.resolution
-        print(self.sz)
-        self.img = self.ids._image.texture = Texture.create(size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
+        self.ids._monitor.setup(self.ids._camera.resolution)
     
     def PiPlay(self, instance):
         self.ids._camera.play = True
@@ -35,10 +44,11 @@ class PiMien(AnchorLayout):
         self.ids._camera.stop()
 
     def PiRefresh(self, instance):
-        # self.img.blit_buffer(pbuffer=self.cam.texture.pixels, size=self.sz, colorfmt='rgba', bufferfmt='ubyte')
-        # self.pil = PILImage.frombytes(mode='RGBA', size=self.cam.size, data=self.cam.texture.pixels)
-        self.pil = self.ids._camera.pil()
-        self.pil.show()
+        img = self.ids._camera.img()
+        #
+        # processing
+        #
+        self.ids._monitor.mon(img)
 
 class PiMienApp(App):
     def build(self):

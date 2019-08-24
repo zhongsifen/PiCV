@@ -1,6 +1,5 @@
 # File name: PiMien.kv
 #:kivy 1.7.0
-#:import PiCam PiCam
 
 <ToolButton@Button>:
     size_hint: None,None
@@ -47,8 +46,8 @@
                 id: _camera
                 resolution: (640,450)
                 play: True
-            Image:
-                id: _image
+            PiMon:
+                id: _monitor
                 resolution: (640,450)
     AnchorLayout:
         anchor_x: 'center'
