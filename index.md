@@ -1,6 +1,6 @@
 ## Welcome to GitHub Pages
 
-A computer vision library for Raspberry Pi
+A computer vision library for Raspberry Pi.
 
 You can use the [editor on GitHub](https://github.com/zhongsifen/PiCV/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
